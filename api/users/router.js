@@ -7,6 +7,11 @@ router.get("/", async (req, res, next) => {
     res.status(200).json(array);
 })
 
+router.get("/:id", async (req, res, next) => {
+    const array = await model.getById(req.params.id);
+    res.status(200).json(array);
+})
+
 router.post("/", async (req, res, next) => {
     try{
         const {username, password} = req.body;
