@@ -13,9 +13,20 @@ router.post("/", async (req, res, next) => {
         const result = await model.add({username, password});
         res.status(201).json(result);
     }catch(err){
-        
+        res.status(500).json(err);
     }
     
+})
+
+router.put("/:id", async (req, res, next)=>{
+    try{
+        const {id} = req.params;
+        const {username, password} = req.body;
+        const result = await model.modify(id, {username, password});
+        res.status(201).json(result);
+    }catch(err){
+        res.status(500).json(err);
+    }
 })
 
 router.delete("/:id", async (req, res, next) =>{
@@ -23,7 +34,7 @@ router.delete("/:id", async (req, res, next) =>{
         const result = await model.remove(req.params.id);
         res.status(201).json(result);
     }catch(err){
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 })
 

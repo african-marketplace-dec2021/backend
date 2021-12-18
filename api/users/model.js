@@ -12,4 +12,8 @@ async function remove(id){
     return await db('users').where("id", id).del();
 }
 
-module.exports = {getAll, add, remove};
+async function modify(id, obj){
+    return await db('users').update(obj).where('id', id);
+}
+
+module.exports = {getAll, add, remove, modify};
