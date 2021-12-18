@@ -13,9 +13,18 @@ router.post("/", async (req, res, next) => {
         const result = await model.add({username, password});
         res.status(201).json(result);
     }catch(err){
-        res.status(400).json(err);
+        
     }
     
+})
+
+router.delete("/:id", async (req, res, next) =>{
+    try{
+        const result = await model.remove(req.params.id);
+        res.status(201).json(result);
+    }catch(err){
+        res.status(400).json(err);
+    }
 })
 
 module.exports = router;
