@@ -5,11 +5,13 @@ async function getAll(){
 }
 
 async function add(obj){
-    const sequence = await db('users_id_seq').select("last_value");
-    console.log("sequence = ", sequence);
-    const last_value = parseInt(sequence[0].last_value);
-    // =  [ { last_value: '5', log_cnt: '32', is_called: true } ]
-    const result = await db('users').insert({...obj, id:last_value+1});
+    // //nextval('serial')
+    // const sequence = await db('users_id_seq');
+    // const last_value = parseInt(sequence[0].last_value)+1;
+    // console.log("sequence = ", sequence);
+    // console.log("last_value = ", last_value);
+    // // =  [ { last_value: '5', log_cnt: '32', is_called: true } ]
+    const result = await db('users').insert({...obj, id:"nextval(`users_id_seq`)"});
     return await db('users').where("id", last_value+1);
 }
 

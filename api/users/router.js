@@ -8,9 +8,14 @@ router.get("/", async (req, res, next) => {
 })
 
 router.post("/", async (req, res, next) => {
-    const {username, password} = req.body;
-    const result = await model.add({username, password});
-    res.status(201).json(result);
+    try{
+        const {username, password} = req.body;
+        const result = await model.add({username, password});
+        res.status(201).json(result);
+    }catch(err){
+        res.status(400).json(err);
+    }
+    
 })
 
 module.exports = router;
