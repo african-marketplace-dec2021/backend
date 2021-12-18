@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
           table.string("email").notNull();
           table.string("user_type");
           table.integer("user_id").notNull();
-          table.foreign("user_id").references("id").inTable("users"); //pending delete
+        //   table.foreign("user_id").references("id").inTable("users");
       })
   };
   
