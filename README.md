@@ -19,7 +19,17 @@
     (need text)
 
 ## response code
-    (need text)
+    
+    Status Code | Description
+    --- | --- 
+    200 | request successfully processed 
+    201 | successfully created the new record
+    400 | the request could not be understood by the server
+    401 | unauthorized request from an unknown user
+    403 | unauthorized request from a known user
+    404 | the request resource is not found on the server
+    500 | unknown and/or unexpected error occured
+    503 | the server is not ready to handle this request
 
 ### endpoint /api/auth
 
