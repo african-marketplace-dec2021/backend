@@ -104,3 +104,27 @@ describe('[5] - describe isEmptyArray', () => {
         expect(helper.isEmptyArray(varArray)).toBe(false);
     })
 })
+
+describe('[6] - describe isNumber', () => {
+    it('[6-1] - isNumber return true for number', () => {
+        expect(helper.isNumber(varNumber)).toBe(true);
+    })
+    it('[6-2] - isNumber return falsefor an empty array', () => {
+        expect(helper.isNumber(varEmptyArray)).toBe(false);
+    })
+    it('[6-3] - isNumber return false for object', () => {
+        expect(helper.isNumber(varObj)).toBe(false);
+    })
+    it('[6-4] - isNumber return false for an undefined object ', () => {
+        expect(helper.isNumber(varUndefined)).toBe(false);
+    })
+    it('[6-5] - isNumber return false for a string ', () => {
+        expect(helper.isNumber(varString)).toBe(false);
+    })
+    it('[6-6] - isNumber return false for an empty string ', () => {
+        expect(helper.isNumber(varEmptyString)).toBe(false);
+    })
+    it('[6-7] - isNumber return false for an array', () => {
+        expect(helper.isNumber(varArray)).toBe(false);
+    })
+})
