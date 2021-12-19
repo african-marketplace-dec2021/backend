@@ -1,6 +1,6 @@
 const db = require("../../database/db-config");
 //change your table name here
-const tableName = "";
+const tableName = "products";
 
 async function getAll(){
     return await db(tableName);

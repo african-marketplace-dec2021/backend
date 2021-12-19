@@ -95,7 +95,10 @@ async function verifyModifiedObject (req, res, next){
         //implement verify new object
         const keys = [
             {name:'first_name', type:'string'},
-            {name:'last_name', type:'string'}
+            {name:'last_name', type:'string'},
+            {name:'middle_name', type:'string'},
+            {name:'email', type:'string'},
+            {name:'user_type', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();

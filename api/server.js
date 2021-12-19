@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const routerUsers = require("./users/router");
 const routerProfiles = require("./profiles/router");
+const routerProducts = require("./products/router")
 const routerGeneric = require("./generic/router");
 const {errorHandler} = require("./errorHandler");
 
@@ -16,6 +17,7 @@ server.get("/", (req, res)=>{
 })
 server.use("/api/users", routerUsers);
 server.use("/api/profiles", routerProfiles);
+server.use("/api/products", routerProducts);
 // server.use("/api/other", routerGeneric);
 
 server.use('*', (req, res)=>{
