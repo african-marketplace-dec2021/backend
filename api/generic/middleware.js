@@ -48,7 +48,10 @@ async function verifyNewObject (req, res, next){
 async function verifyModifiedObject (req, res, next){
     try{
         //implement verify new object
-        const keys = [];
+        const keys = [
+            {name:'first_name', type:'string'},
+            {name:'last_name', type:'string'}
+        ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();
     }catch(err){
