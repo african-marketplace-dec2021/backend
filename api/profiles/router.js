@@ -2,6 +2,7 @@ const express = require("express");
 const router =  express();
 const model = require("./model");
 const {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUserId, verifyUserType} = require("./middleware");
+const {authorizedOnly} = require("../auth/middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -21,7 +22,7 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", verifyNewObject, verifyUserId, verifyUserType, async (req, res, next) => {
+router.post("/", authorizedOnly, verifyNewObject, verifyUserId, verifyUserType, async (req, res, next) => {
     try{
         
         const result = await model.add(req.body.newProfile);
@@ -32,7 +33,7 @@ router.post("/", verifyNewObject, verifyUserId, verifyUserType, async (req, res,
     
 })
 
-router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
+router.put("/:id", authorizedOnly, verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
     try{
         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
         res.status(201).json({result});
@@ -41,7 +42,7 @@ router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next
     }
 })
 
-router.delete("/:id", verifyExistingId, async (req, res, next) =>{
+router.delete("/:id", authorizedOnly, verifyExistingId, async (req, res, next) =>{
     try{
         const result = await model.remove(req.params.id);
         res.status(201).json({result});
