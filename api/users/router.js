@@ -4,13 +4,22 @@ const model = require("./model");
 const {verifyExistingId} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
-    const array = await model.getAll();
-    res.status(200).json(array);
+    try{
+        const array = await model.getAll();
+        res.status(200).json(array);
+    }catch(err){
+        next(err);
+    }
+    
 })
 
 router.get("/:id", verifyExistingId, async (req, res, next) => {
-    const array = await model.getById(req.params.id);
-    res.status(200).json(array);
+    try{
+        const array = await model.getById(req.params.id);
+        res.status(200).json(array);
+    }catch(err){
+        next(err);
+    }
 })
 
 router.post("/", async (req, res, next) => {
