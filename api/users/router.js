@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId} = require("./middleware");
+const {verifyExistingId, verifyModifiedObject} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -33,11 +33,9 @@ router.post("/", async (req, res, next) => {
     
 })
 
-router.put("/:id", async (req, res, next)=>{
+router.put("/:id", verifyModifiedObject, async (req, res, next)=>{
     try{
-        const {id} = req.params;
-        const {username, password} = req.body;
-        const result = await model.modify(id, {username, password});
+        const result = await model.modify(id, {...req.modifiedObject});
         res.status(201).json(result);
     }catch(err){
         res.status(500).json(err);

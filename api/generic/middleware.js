@@ -1,5 +1,5 @@
 const model = require("./model");
-const {isEmptyArray, isUndefined, verifyInterger} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject} = require("../helper");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -39,4 +39,26 @@ async function verifyNewObject (req, res, next){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject};
+/**
+ * example keys = [
+            {name:'username', type:'string'},
+            {name:'password', type:'string'},
+    ]
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+async function verifyModifiedObject (req, res, next){
+    try{
+        //implement verify new object
+        const keys = [];
+        req.modifiedObject = processBodyToObject(keys, req);
+        next();
+    }catch(err){
+        next(err);
+    }
+}
+
+
+
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject};

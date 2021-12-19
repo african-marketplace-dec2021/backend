@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyNewObject} = require("./middleware");
+const {verifyExistingId, verifyNewObject, verifyModifiedObject} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -29,7 +29,7 @@ router.post("/", verifyNewObject, async (req, res, next) => {
     
 })
 
-router.put("/:id", verifyExistingId, verifyNewObject, async (req, res, next)=>{
+router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
     try{
         //implement your code here
         res.status(503).json({message:`path ${req.path}, PUT not ready`});
