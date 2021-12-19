@@ -132,7 +132,7 @@ describe('[6] - describe verifyInterger', () => {
     it('[6-7] - verifyInterger return false for an array', () => {
         expect(helper.verifyInterger(varArray)).toBe(false);
     })
-    it('[6-8] - verifyInterger return falsefor an empty array', () => {
+    it('[6-8] - verifyInterger return false for an empty array', () => {
         expect(helper.verifyInterger(varEmptyArray)).toBe(false);
     })
     it('[6-9] - verifyInterger return false for an decimal', () => {
