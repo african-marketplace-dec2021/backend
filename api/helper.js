@@ -6,8 +6,8 @@ function isString(input) {
     return typeof input === 'string';
 }
 
-function isNumber(input){
-    return typeof input === 'number';
+function verifyInterger(input){
+    return Number.isInteger(input);
 }
 
 function isEmptyString(input) {
@@ -21,4 +21,4 @@ function verifyString(input) {
 function isEmptyArray(input) {
     return Array.isArray(input) && input.length === 0;
 }
-module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, isNumber };
+module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger };

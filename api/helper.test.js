@@ -2,6 +2,8 @@ const helper = require("./helper");
 
 const varString = 'string';
 const varEmptyString = "";
+const varInteger = 15;
+const varDecimal = 15.04;
 const varNumber = 15;
 const varObj = { 'key': 'value' };
 const varArray = ['key1', 'key2'];
@@ -105,26 +107,32 @@ describe('[5] - describe isEmptyArray', () => {
     })
 })
 
-describe('[6] - describe isNumber', () => {
-    it('[6-1] - isNumber return true for number', () => {
-        expect(helper.isNumber(varNumber)).toBe(true);
+describe('[6] - describe verifyInterger', () => {
+    it('[6-1] - verifyInterger return true for an integer ', () => {
+        expect(helper.verifyInterger(varInteger)).toBe(true);
     })
-    it('[6-2] - isNumber return falsefor an empty array', () => {
-        expect(helper.isNumber(varEmptyArray)).toBe(false);
+    it('[6-2] - verifyInterger return falsefor an empty array', () => {
+        expect(helper.verifyInterger(varEmptyArray)).toBe(false);
     })
-    it('[6-3] - isNumber return false for object', () => {
-        expect(helper.isNumber(varObj)).toBe(false);
+    it('[6-3] - verifyInterger return false for object', () => {
+        expect(helper.verifyInterger(varObj)).toBe(false);
     })
-    it('[6-4] - isNumber return false for an undefined object ', () => {
-        expect(helper.isNumber(varUndefined)).toBe(false);
+    it('[6-4] - verifyInterger return false for an undefined object ', () => {
+        expect(helper.verifyInterger(varUndefined)).toBe(false);
     })
-    it('[6-5] - isNumber return false for a string ', () => {
-        expect(helper.isNumber(varString)).toBe(false);
+    it('[6-5] - verifyInterger return false for a string ', () => {
+        expect(helper.verifyInterger(varString)).toBe(false);
     })
-    it('[6-6] - isNumber return false for an empty string ', () => {
-        expect(helper.isNumber(varEmptyString)).toBe(false);
+    it('[6-6] - verifyInterger return false for an empty string ', () => {
+        expect(helper.verifyInterger(varEmptyString)).toBe(false);
     })
-    it('[6-7] - isNumber return false for an array', () => {
-        expect(helper.isNumber(varArray)).toBe(false);
+    it('[6-7] - verifyInterger return false for an array', () => {
+        expect(helper.verifyInterger(varArray)).toBe(false);
+    })
+    it('[6-8] - verifyInterger return true for number', () => {
+        expect(helper.verifyInterger(varNumber)).toBe(true);
+    })
+    it('[6-9] - verifyInterger return false for an decimal', () => {
+        expect(helper.verifyInterger(varDecimal)).toBe(false);
     })
 })
