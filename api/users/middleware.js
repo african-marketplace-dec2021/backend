@@ -81,4 +81,4 @@ async function verifyModifiedObject (req, res, next){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUniqueUsername};
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUniqueUsername, isInTable, isIdInTable};

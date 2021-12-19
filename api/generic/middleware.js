@@ -59,4 +59,22 @@ async function verifyModifiedObject (req, res, next){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject};
+async function isIdInTable(id){
+    const array = await model.getById(id);
+    if(isEmptyArray(array)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+async function isInTable(filtered){
+    const array = await model.getBy(filtered);
+    if(isEmptyArray(array)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, isInTable, isIdInTable};
