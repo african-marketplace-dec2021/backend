@@ -21,4 +21,15 @@ function verifyString(input) {
 function isEmptyArray(input) {
     return Array.isArray(input) && input.length === 0;
 }
-module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger };
+
+function processBodyToObject(keys, req_object){
+    const obj = {};
+    keys.forEach(element=>{
+        if (req_object.hasOwnProperty(element.name) && typeof req_object[element.name] === element.type){
+            obj[element.name] = req_object[element.name];
+        }
+    })
+    return obj;
+}
+
+module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger, processBodyToObject };

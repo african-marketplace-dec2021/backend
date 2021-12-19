@@ -139,3 +139,75 @@ describe('[6] - describe verifyInterger', () => {
         expect(helper.verifyInterger(varDecimal)).toBe(false);
     })
 })
+
+describe ('[7] - describe processBodyToObject', ()=>{
+    it('[7-1] - processBodyToObject return all', ()=>{
+        const keys = [
+            {name:'name', type:'string'},
+            {name:'price', type:'number'},
+            {name:'quantity', type:'number'},
+            {name:'boolean', type:'boolean'},
+        ];
+
+        const req_object = {'name': 'tom', 'price':15.12, 'quantity':10, 'boolean':false};
+
+        const actual = helper.processBodyToObject(keys, req_object);
+        const expected =  { name: 'tom', price: 15.12, quantity: 10, boolean: false };
+        expect(actual).toMatchObject(expected);
+    })
+
+    it('[7-2] - processBodyToObject return partial', ()=>{
+        const keys = [
+            {name:'name', type:'string'},
+            {name:'price', type:'number'},
+        ];
+
+        const req_object = {'name': 'tom', 'price':15.12, 'quantity':10, 'boolean':false};
+
+        const actual = helper.processBodyToObject(keys, req_object);
+        const expected =  { name: 'tom', price: 15.12};
+        expect(actual).toMatchObject(expected);
+    })
+
+    it('[7-3] - processBodyToObject return partial', ()=>{
+        const keys = [
+            {name:'name', type:'string'},
+            {name:'price', type:'number'},
+        ];
+
+        const req_object = {'name': 'tom', 'price':'15.12', 'quantity':10, 'boolean':false};
+
+        const actual = helper.processBodyToObject(keys, req_object);
+        const expected =  { name: 'tom'};
+        expect(actual).toMatchObject(expected);
+    })
+
+    it('[7-4] - processBodyToObject return partial', ()=>{
+        const keys = [
+            {name:'name', type:'string'},
+            {name:'price', type:'number'},
+            {name:'quantity', type:'number'},
+        ];
+
+        const req_object = {'name': 'tom', 'price':15.12, 'quantity':10, 'boolean':false};
+
+        const actual = helper.processBodyToObject(keys, req_object);
+        const expected =  { name: 'tom', price: 15.12, quantity: 10, };
+        expect(actual).toMatchObject(expected);
+    })
+
+    it('[7-5] - processBodyToObject return an empty object', ()=>{
+        const keys = [
+            {name:'name', type:'boolean'},
+            {name:'price', type:'boolean'},
+            {name:'quantity', type:'boolean'},
+        ];
+
+        const req_object = {'name': 'tom', 'price':15.12, 'quantity':10, 'boolean':false};
+
+        const actual = helper.processBodyToObject(keys, req_object);
+        const expected =  { };
+        expect(actual).toMatchObject(expected);
+    })
+
+})
