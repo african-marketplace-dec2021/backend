@@ -2,10 +2,10 @@
     (need text)
 
 
-## dependencies ##
+## ========== dependencies ==========
     (need text)
 
-## how to run the backend ##
+## ========== how to run the backend ==========
 
 * download the project onto your local computer
 
@@ -24,10 +24,10 @@
 * make sure the running server has a database called "market_test" for testing, with username "postgres", password "P@$$w0rd", and connect of "127.0.0.1'
 
 
-## troubleshooting ##
+## ========== troubleshooting ==========
     (need text)
 
-## response code
+## ========== response code ==========
     
     Status Code | Description
     --- | --- 
@@ -40,7 +40,7 @@
     500 | unknown and/or unexpected error occured
     503 | the server is not ready to handle this request
 
-## ==========endpoint /api/auth==========
+## ========== endpoint /api/auth ==========
 
 #### POST /api/auth/register
         (need text)
@@ -49,7 +49,7 @@
 #### POST /api/auth/login
         (need text)
 
-## ==========endpoint /api/users==========
+## ========== endpoint /api/users ==========
 
 #### GET /api/users/
         (need text)
@@ -66,7 +66,7 @@
 #### DELETE /api/users/:id
         (need text)
 
-## ==========endpoint /api/profiles==========
+## ========== endpoint /api/profiles ==========
 
 #### GET /api/profiles/
         (need text)
@@ -83,7 +83,7 @@
 #### DELETE /api/profiles/:id
         (need text)
 
-## ==========endpoint /api/products==========
+## ========== endpoint /api/products ==========
 
 #### GET /api/products/
         (need text)
@@ -100,7 +100,7 @@
 #### DELETE /api/products/:id
         (need text)
 
-## ==========endpoint /api/orders==========
+## ========== endpoint /api/orders ==========
 
 #### GET /api/orders/
         (need text)
