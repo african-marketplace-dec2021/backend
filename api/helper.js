@@ -11,10 +11,6 @@ function verifyInterger(input){
     return Number.isInteger(input) || regex.test(input);
 }
 
-function verifyNumber(input){
-    return Number.is
-}
-
 function isEmptyString(input) {
     return isString(input) && input.trim() === "";
 }
