@@ -23,8 +23,6 @@ async function verifyExistingId (req, res, next){
 
 async function isIdInTable(id){
     const array = await model.getById(id);
-    console.log("array = ", array);
-    console.log("isEmptyArray(array) return ", isEmptyArray(array));
     if(isEmptyArray(array)){
         return false;
     }else{
