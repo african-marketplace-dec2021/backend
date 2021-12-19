@@ -7,4 +7,6 @@ module.exports = {
     DB_DEV_NAME:'market',
     DB_TEST_NAME:'market_test',
     SERVER_NAME:'market',
+    BCRYPT_ROUND : 10,
+    TOKEN_SECRET : "secret key"
 }

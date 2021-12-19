@@ -2,6 +2,8 @@ const express = require("express");
 const router =  express();
 const model = require("./model");
 const {verifyExistingId, verifyModifiedObject, verifyNewObject, verifyUniqueUsername} = require("./middleware");
+const bcrypt = require("bcrypt");
+const { BCRYPT_ROUND } = require("../../env");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -25,7 +27,7 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
 router.post("/", verifyNewObject, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password} = req.body;
-        const result = await model.add({username, password});
+        const result = await model.add({username, password:bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND)});
         res.status(201).json(result);
     }catch(err){
         res.status(500).json(err);
