@@ -5,7 +5,8 @@ const {verifyExistingId, verifyNewObject, verifyModifiedObject} = require("./mid
 
 router.get("/", async (req, res, next) => {
     try{
-        res.status(503).json({message:`path ${req.path}, GET not ready`});
+        const array = await model.getAll();
+        res.status(200).json(array);
     }catch(err){
         next(err);
     }
@@ -13,7 +14,8 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", verifyExistingId, async (req, res, next) => {
     try{
-        res.status(503).json({message:`path ${req.path}, GET not ready`});
+        const array = await model.getById(req.params.id);
+        res.status(200).json(array);
     }catch(err){
         next(err);
     }
@@ -31,8 +33,8 @@ router.post("/", verifyNewObject, async (req, res, next) => {
 
 router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
     try{
-        //implement your code here
-        res.status(503).json({message:`path ${req.path}, PUT not ready`});
+        const result = await model.modify(req.params.id, {...req.body.modifiedObject})
+        res.status(201).json(result);
     }catch(err){
         next(err);
     }

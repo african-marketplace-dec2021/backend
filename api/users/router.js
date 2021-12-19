@@ -33,9 +33,9 @@ router.post("/", async (req, res, next) => {
     
 })
 
-router.put("/:id", verifyModifiedObject, async (req, res, next)=>{
+router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
     try{
-        const result = await model.modify(id, {...req.modifiedObject});
+        const result = await model.modify(req.params.id, {...req.body.modifiedObject});
         res.status(201).json(result);
     }catch(err){
         res.status(500).json(err);

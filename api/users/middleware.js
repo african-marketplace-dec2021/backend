@@ -48,7 +48,7 @@ async function verifyModifiedObject (req, res, next){
             {name:'username', type:'string'},
             {name:'password', type:'string'},
         ];
-        req.modifiedObject = processBodyToObject(keys, req);
+        req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();
     }catch(err){
         next(err);

@@ -44,21 +44,16 @@ async function verifyNewObject (req, res, next){
             {name:'username', type:'string'},
             {name:'password', type:'string'},
     ]
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
  */
 async function verifyModifiedObject (req, res, next){
     try{
         //implement verify new object
         const keys = [];
-        req.modifiedObject = processBodyToObject(keys, req);
+        req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();
     }catch(err){
         next(err);
     }
 }
-
-
 
 module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject};
