@@ -3,6 +3,7 @@ const server = express();
 const helmet = require("helmet");
 const cors = require("cors");
 const routerUsers = require("./users/router");
+const routerProfiles = require("./profiles/router");
 const routerGeneric = require("./generic/router");
 const {errorHandler} = require("./errorHandler");
 
@@ -14,7 +15,8 @@ server.get("/", (req, res)=>{
     res.status(200).json({message:"hello world from African Marketplace Dec 2021"});
 })
 server.use("/api/users", routerUsers);
-server.use("/api/other", routerGeneric);
+server.use("/api/profiles", routerProfiles);
+// server.use("/api/other", routerGeneric);
 
 server.use('*', (req, res)=>{
     res.status(404).json({message:`invalid path ${req.path}`});
