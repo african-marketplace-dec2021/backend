@@ -34,7 +34,7 @@ async function verifyNewObject (req, res, next){
     try{
         const {name, price, description} = req.body
         if(isUndefined(name) || isUndefined(price) || isUndefined(description)){
-            res.status(400).json({message:"require name and price"});
+            res.status(400).json({message:"require name, description, and price"});
         }else if(verifyStringAndLength(name, 3, 30) === false){
             res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
         }else if(verifyStringAndLength(description, 3, 1000) === false){
