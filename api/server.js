@@ -9,7 +9,7 @@ server.get("/", (req, res)=>{
 })
 server.use("/api/users", routerUsers);
 
-server.use((req, res)=>{
+server.use('*', (req, res)=>{
     res.status(404).json({message:`invalid path ${req.path}`});
 })
 
