@@ -7,7 +7,7 @@ exports.seed = function(knex) {
         {id: 2, username:"user2", password:"password2"},
         {id: 3, username:"user3", password:"password3"},
         {id: 4, username:"user4", password:"password4"},
-        {id: 5, username:"user5", password:"password5"},
+        {id: 5, username:"tomtom", password:"$2b$10$13/VWNhhwFQrYXhUvH4A7OKPnYwPBHPF77H2yCrhCjE0kQ910PFF2"},
       ]);
     });
 };
