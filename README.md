@@ -5,7 +5,15 @@
     (need text)
 
 ## how to run the backend
-    (need text)
+    _download the project onto your local computer
+    _create a ".env" file and add the "NODE_ENV=development" into ".env" file
+    _run "npm i" to install node and related libraries
+    _make sure the PostgreSQL is installed
+    _make sure the PG Admin is installed
+    _make sure the PostgreSQL has the username "postgres" and password "P@$$w0rd"
+    _make sure the running server has a database called "market" for development, with username "postgres", password "P@$$w0rd", and connect of "127.0.0.1'
+    _make sure the running server has a database called "market_test" for testing, with username "postgres", password "P@$$w0rd", and connect of "127.0.0.1'
+
 
 ## troubleshooting
     (need text)
