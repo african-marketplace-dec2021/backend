@@ -1,10 +1,17 @@
 # intorduction
+    (need text)
 
 ## dependencies
+    (need text)
 
-## how to run the backend and troubleshooting
+## how to run the backend
+    (need text)
+
+## troubleshooting
+    (need text)
 
 ## response code
+    (need text)
 
 ### endpoint /api/auth
 
@@ -19,13 +26,13 @@
     GET /api/users/
         (need text)
 
-    GET /api/usrs/:id
+    GET /api/users/:id
         (need text)
     
-    POST /api/user/
+    POST /api/users/
         (need text)
     
-    PUT /api/user/:id
+    PUT /api/users/:id
         (need text)
     
     DELETE /api/users/:id
