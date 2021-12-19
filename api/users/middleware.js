@@ -1,5 +1,6 @@
 const model = require("./model");
-const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, isEmptyString} = require("../helper");
+const { user } = require("pg/lib/defaults");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -23,8 +24,6 @@ async function verifyExistingId (req, res, next){
 
 async function isIdInTable(id){
     const array = await model.getById(id);
-    console.log("array = ", array);
-    console.log("isEmptyArray(array) return ", isEmptyArray(array));
     if(isEmptyArray(array)){
         return false;
     }else{
@@ -32,10 +31,38 @@ async function isIdInTable(id){
     }
 }
 
+async function isInTable(filtered){
+    const array = await model.getBy(filtered);
+    if(isEmptyArray(array)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+async function verifyUniqueUsername(req, res, next){
+    try{
+        const boolean = await isInTable({'username':req.body.username});
+        if(boolean){
+            res.status(400).json({message:`username ${req.body.username} is not available`});
+        }else{
+            next();
+        }
+    }catch(err){
+        next(err);
+    }
+}
+
 async function verifyNewObject (req, res, next){
     try{
-        //implement verify new object
-        next();
+        const {username, password} = req.body;
+        if (isUndefined(username)  || isUndefined(password)){
+            res.status(400).json({message:"require username and password"})
+        }else if (isEmptyString(username) ||  isEmptyString(password) || username.length < 5 || password.length < 5 || username.length > 20 || password.length > 20){
+            res.status(400).json({message:"username and password msut be between 5 and 20 characters"});
+        }else{
+            next();
+        }
     }catch(err){
         next(err);
     }
@@ -43,7 +70,6 @@ async function verifyNewObject (req, res, next){
 
 async function verifyModifiedObject (req, res, next){
     try{
-        //implement verify new object
         const keys = [
             {name:'username', type:'string'},
             {name:'password', type:'string'},
@@ -55,4 +81,4 @@ async function verifyModifiedObject (req, res, next){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject};
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUniqueUsername};

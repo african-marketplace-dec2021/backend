@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyModifiedObject} = require("./middleware");
+const {verifyExistingId, verifyModifiedObject, verifyNewObject, verifyUniqueUsername} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -22,7 +22,7 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", async (req, res, next) => {
+router.post("/", verifyNewObject, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password} = req.body;
         const result = await model.add({username, password});
