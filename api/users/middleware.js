@@ -22,6 +22,11 @@ async function verifyExistingId (req, res, next){
     }
 }
 
+/**
+ * check if an id is in the table
+ * @param {*} id 
+ * @returns 
+ */
 async function isIdInTable(id){
     const array = await model.getById(id);
     if(isEmptyArray(array)){
@@ -31,6 +36,11 @@ async function isIdInTable(id){
     }
 }
 
+/*
+    filtered object contains a column name and value
+    i.e. {'username':'user1'}
+    i.e. {'product_name':'shoe'}
+*/
 async function isInTable(filtered){
     const array = await model.getBy(filtered);
     if(isEmptyArray(array)){
