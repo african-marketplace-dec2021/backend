@@ -87,6 +87,9 @@ describe('[5] - describe isEmptyArray', () => {
     it('[5-1] - isEmptyArray return true for an empty array', () => {
         expect(helper.isEmptyArray(varEmptyArray)).toBe(true);
     })
+    it('[5-1] - isEmptyArray return false for an array', () => {
+        expect(helper.isEmptyArray(varArray)).toBe(false);
+    })
     it('[5-2] - isEmptyArray return false for object', () => {
         expect(helper.isEmptyArray(varObj)).toBe(false);
     })

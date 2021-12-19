@@ -8,9 +8,9 @@ async function verifyExistingId (req, res, next){
             res.status(400).json({message:"require id"});
         }else if (verifyInterger(Number(id)) === false){
             res.status(400).json({message:`invalid id ${id}`});
-        }else {
-            const array = await model.getById(id);
-            if(isEmptyArray(array)){
+        }else{
+            const boolean = await isIdInTable(id);
+            if (boolean === false){
                 res.status(400).json({message:`id ${id} not found`});
             }else{
                 next();
@@ -18,6 +18,17 @@ async function verifyExistingId (req, res, next){
         }
     }catch(err){
         next(err);
+    }
+}
+
+async function isIdInTable(id){
+    const array = await model.getById(id);
+    console.log("array = ", array);
+    console.log("isEmptyArray(array) return ", isEmptyArray(array));
+    if(isEmptyArray(array)){
+        return false;
+    }else{
+        return true;
     }
 }
 
