@@ -9,7 +9,8 @@ const {BCRYPT_ROUND} = require("../../env");
 router.post("/register", verifyNewUser, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password} = req.body;
-        const result = await modelUsers.add({username, password: bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND)});
+        const hashsedPassword = bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND);
+        const result = await modelUsers.add({username, password: hashsedPassword});
         res.status(201).json(result);
     }catch(err){
         next(err);
