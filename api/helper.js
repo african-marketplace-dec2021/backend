@@ -7,7 +7,12 @@ function isString(input) {
 }
 
 function verifyInterger(input){
-    return Number.isInteger(input);
+    let regex = /^[-+]?[0-9]+\.[0-9]+$/;
+    return Number.isInteger(input) || regex.test(input);
+}
+
+function verifyNumber(input){
+    return Number.is
 }
 
 function isEmptyString(input) {

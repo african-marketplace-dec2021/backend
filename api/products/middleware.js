@@ -1,5 +1,5 @@
 const model = require("./model");
-const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength} = require("../helper");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -32,25 +32,29 @@ async function isIdInTable(id){
 
 async function verifyNewObject (req, res, next){
     try{
-        //implement verify new object
-        next();
+        const {name, price, description} = req.body
+        if(isUndefined(name) || isUndefined(price) || isUndefined(description)){
+            res.status(400).json({message:"require name and price"});
+        }else if(verifyStringAndLength(name, 3, 30) === false){
+            res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
+        }else if(verifyStringAndLength(description, 3, 1000) === false){
+            res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
+        }else if(verifyInterger(price) === false){
+            res.status(400).json({message:"price must be a number"});
+        }else{
+            req.body.newProduct = {name, price, description};
+            next();
+        }
     }catch(err){
         next(err);
     }
 }
 
-/**
- * example keys = [
-            {name:'username', type:'string'},
-            {name:'password', type:'string'},
-    ]
- */
 async function verifyModifiedObject (req, res, next){
     try{
-        //implement verify new object
         const keys = [
-            {name:'first_name', type:'string'},
-            {name:'last_name', type:'string'}
+            {name:'name', type:'string'},
+            {name:'price', type:'number'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();

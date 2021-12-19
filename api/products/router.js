@@ -23,8 +23,8 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
 
 router.post("/", verifyNewObject, async (req, res, next) => {
     try{
-        //implement your code here
-        res.status(503).json({message:`path ${req.path}, POST not ready`});
+        const result = await model.add(req.body.newProduct);
+        res.status(200).json(result);
     }catch(err){
         next(err);
     }
