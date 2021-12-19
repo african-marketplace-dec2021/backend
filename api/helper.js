@@ -17,6 +17,9 @@ function isEmptyString(input) {
 function verifyString(input) {
     return !isUndefined(input) && isString(input) && !isEmptyString(input);
 }
+function verifyStringAndLength(input, min, max) {
+    return !isUndefined(input) && isString(input) && !isEmptyString(input) && input.length >= min && input.length <= max;
+}
 
 function isEmptyArray(input) {
     return Array.isArray(input) && input.length === 0;
@@ -32,4 +35,4 @@ function processBodyToObject(keys, req_object){
     return obj;
 }
 
-module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger, processBodyToObject };
+module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger, processBodyToObject, verifyStringAndLength };

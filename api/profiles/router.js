@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyNewObject, verifyModifiedObject} = require("./middleware");
+const {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUserId, verifyUserType} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -21,10 +21,11 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", verifyNewObject, async (req, res, next) => {
+router.post("/", verifyNewObject, verifyUserId, verifyUserType, async (req, res, next) => {
     try{
-        //implement your code here
-        res.status(503).json({message:`path ${req.path}, POST not ready`});
+        
+        const result = await model.add(req.body.newProfile);
+        res.status(201).json(result);
     }catch(err){
         next(err);
     }

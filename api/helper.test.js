@@ -211,3 +211,27 @@ describe ('[7] - describe processBodyToObject', ()=>{
     })
 
 })
+
+describe('[8] - describe verifyStringAndLength', () => {
+    it('[8-1] - verifyStringAndLength return true for a string', () => {
+        expect(helper.verifyStringAndLength(varString, 2, 100)).toBe(true);
+    })
+    it('[8-2] - verifyStringAndLength return false for an empty string', () => {
+        expect(helper.verifyString(varEmptyString, 2, 100)).toBe(false);
+    })
+    it('[8-3] - verifyStringAndLength return false for an object', () => {
+        expect(helper.verifyString(varObj, 2, 100)).toBe(false);
+    })
+    it('[8-4] - verifyStringAndLength return false for an undefined object', () => {
+        expect(helper.verifyString(varUndefined, 2, 100)).toBe(false);
+    })
+    it('[8-5] - verifyStringAndLength return false for a number ', () => {
+        expect(helper.verifyStringAndLength(varNumber, 2, 100)).toBe(false);
+    })
+    it('[8-6] - verifyStringAndLength return false for an array', () => {
+        expect(helper.verifyStringAndLength(varArray, 2, 100)).toBe(false);
+    })
+    it('[8-7] - verifyStringAndLength return false for an empty array', () => {
+        expect(helper.verifyStringAndLength(varEmptyArray, 2, 100)).toBe(false);
+    })
+})
