@@ -6,7 +6,6 @@ const routerUsers = require("./users/router");
 const routerProfiles = require("./profiles/router");
 const routerProducts = require("./products/router");
 const routerAuth = require("./auth/router");
-const routerGeneric = require("./generic/router");
 const {errorHandler} = require("./errorHandler");
 const {authorizedOnly} = require("./auth/middleware");
 
@@ -21,7 +20,6 @@ server.use("/api/users", authorizedOnly, routerUsers);
 server.use("/api/profiles", authorizedOnly, routerProfiles);
 server.use("/api/products", routerProducts);
 server.use("/api/auth", routerAuth);
-// server.use("/api/other", routerGeneric);
 
 server.use('*', (req, res)=>{
     res.status(404).json({message:`invalid path ${req.path}`});

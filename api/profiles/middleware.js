@@ -84,12 +84,6 @@ async function verifyUserType(req, res, next){
     }
 }
 
-/**
- * example keys = [
-            {name:'username', type:'string'},
-            {name:'password', type:'string'},
-    ]
- */
 async function verifyModifiedObject (req, res, next){
     try{
         //implement verify new object
