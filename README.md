@@ -10,7 +10,7 @@
     _run "npm i" to install node and related libraries
     _make sure the PostgreSQL is installed
     _make sure the PG Admin is installed
-    _make sure the PostgreSQL has the username "postgres" and password "P@$$w0rd"
+    _make sure the PostgreSQL has the username "postgres" and password "P@$$w0rd" configured
     _make sure the running server has a database called "market" for development, with username "postgres", password "P@$$w0rd", and connect of "127.0.0.1'
     _make sure the running server has a database called "market_test" for testing, with username "postgres", password "P@$$w0rd", and connect of "127.0.0.1'
 
