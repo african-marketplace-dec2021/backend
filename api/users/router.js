@@ -36,7 +36,7 @@ router.post("/", verifyNewObject, verifyUniqueUsername, async (req, res, next) =
 router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
     try{
         const result = await model.modify(req.params.id, {...req.body.modifiedObject});
-        res.status(201).json(result);
+        res.status(201).json({result});
     }catch(err){
         res.status(500).json(err);
     }
@@ -45,7 +45,7 @@ router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next
 router.delete("/:id", async (req, res, next) =>{
     try{
         const result = await model.remove(req.params.id);
-        res.status(201).json(result);
+        res.status(201).json({result});
     }catch(err){
         res.status(500).json(err);
     }
