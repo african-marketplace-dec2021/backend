@@ -111,8 +111,8 @@ describe('[6] - describe verifyInterger', () => {
     it('[6-1] - verifyInterger return true for an integer ', () => {
         expect(helper.verifyInterger(varInteger)).toBe(true);
     })
-    it('[6-2] - verifyInterger return falsefor an empty array', () => {
-        expect(helper.verifyInterger(varEmptyArray)).toBe(false);
+    it('[6-2] - verifyInterger return true for number', () => {
+        expect(helper.verifyInterger(varNumber)).toBe(true);
     })
     it('[6-3] - verifyInterger return false for object', () => {
         expect(helper.verifyInterger(varObj)).toBe(false);
@@ -129,8 +129,8 @@ describe('[6] - describe verifyInterger', () => {
     it('[6-7] - verifyInterger return false for an array', () => {
         expect(helper.verifyInterger(varArray)).toBe(false);
     })
-    it('[6-8] - verifyInterger return true for number', () => {
-        expect(helper.verifyInterger(varNumber)).toBe(true);
+    it('[6-8] - verifyInterger return falsefor an empty array', () => {
+        expect(helper.verifyInterger(varEmptyArray)).toBe(false);
     })
     it('[6-9] - verifyInterger return false for an decimal', () => {
         expect(helper.verifyInterger(varDecimal)).toBe(false);
