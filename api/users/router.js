@@ -27,8 +27,12 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
 
 router.post("/", verifyNewObject, verifyUniqueUsername, async (req, res, next) => {
     try{
-        const {username, password} = req.body;
-        const result = await model.add({username, password:bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND)});
+        const {username, password, role} = req.body;
+        const result = await model.add({
+            username, 
+            password:bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND),
+            role
+        });
         res.status(201).json(result);
     }catch(err){
         res.status(500).json(err);
