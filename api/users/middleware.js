@@ -82,6 +82,21 @@ async function verifyNewObject (req, res, next){
     }
 }
 
+async function verifyUsernamePassword (req, res, next){
+    try{
+        const {username, password} = req.body;
+        if (isUndefined(username)  || isUndefined(password)){
+            res.status(400).json({message:"require username, password, and role"})
+        }else if (isEmptyString(username) ||  isEmptyString(password) || username.length < 5 || password.length < 5 || username.length > 20 || password.length > 20){
+            res.status(400).json({message:"username and password msut be between 5 and 20 characters"});
+        }else{
+            next();
+        }
+    }catch(err){
+        next(err);
+    }
+}
+
 async function verifyModifiedObject (req, res, next){
     try{
         const keys = [
@@ -100,4 +115,4 @@ async function verifyModifiedObject (req, res, next){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUniqueUsername, isInTable, isIdInTable};
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyUniqueUsername, isInTable, isIdInTable, verifyUsernamePassword};

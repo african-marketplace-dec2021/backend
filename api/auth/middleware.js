@@ -25,6 +25,7 @@ async function buildToken(req, res, next) {
         {
             id: req.body.authenticatedUser.id,
             username: req.body.authenticatedUser.username,
+            role: req.body.authenticatedUser.role,
         },
         process.env.SECRET || SECRET,
         {
