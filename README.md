@@ -3,6 +3,8 @@
 
     https://african-marketplace-dec-2021.herokuapp.com/
 
+    https://trello.com/b/ENlDFbiN/african-marketplace-board
+
 ## ========== dependencies ==========
     (need text)
 
