@@ -66,8 +66,8 @@ async function verifyUniqueUsername(req, res, next){
 async function verifyNewObject (req, res, next){
     try{
         const {username, password, role} = req.body;
-        if (isUndefined(username)  || isUndefined(password)){
-            res.status(400).json({message:"require username, password, and role"})
+        if (isUndefined(username)  || isUndefined(password) || isUndefined(role)){
+            res.status(400).json({message:"require username, password, and role, role must be 'buyer' or 'seller'"})
         }else if (isEmptyString(username) ||  isEmptyString(password) || username.length < 5 || password.length < 5 || username.length > 20 || password.length > 20){
             res.status(400).json({message:"username and password msut be between 5 and 20 characters"});
         }else if (isEmptyString(role)){

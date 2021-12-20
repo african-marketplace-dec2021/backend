@@ -3,11 +3,11 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const router =  express();
 const modelUsers = require("../users/model");
-const {verifyUsernamePassword, verifyUniqueUsername,} = require("../users/middleware");
+const {verifyUsernamePassword, verifyUniqueUsername,verifyNewObject:verifyNewUser} = require("../users/middleware");
 const {authenticateUsernamePassword, buildToken} = require("./middleware");
 const {BCRYPT_ROUND} = require("../../env");
 
-router.post("/register", verifyUsernamePassword, verifyUniqueUsername, async (req, res, next) => {
+router.post("/register", verifyNewUser, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password, role} = req.body;
         // ???????????? why process.env.BCRYPT_ROUND not working on heroku ???????????????????????????
