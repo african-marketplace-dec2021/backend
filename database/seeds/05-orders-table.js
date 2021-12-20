@@ -4,7 +4,8 @@ exports.seed = function(knex) {
     // .truncate()
     .then(function () {
       return knex('orders').insert([
-        {id: 1, buyer_user_id:2, seller_user_id:3,},
+        // {id: 1, buyer_user_id:2, seller_user_id:3,},
+        {buyer_user_id:2, seller_user_id:3,},
       ]);
     });
 };
