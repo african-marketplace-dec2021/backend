@@ -16,8 +16,10 @@ server.use(cors());
 server.get("/", (req, res)=>{
     res.status(200).json({message:"hello world from African Marketplace Dec 2021"});
 })
-server.use("/api/users", authorizedOnly, routerUsers);
-server.use("/api/profiles", authorizedOnly, routerProfiles);
+// server.use("/api/users", authorizedOnly, routerUsers);
+// server.use("/api/profiles", authorizedOnly, routerProfiles);
+server.use("/api/users", routerUsers);
+server.use("/api/profiles", routerProfiles);
 server.use("/api/products", routerProducts);
 server.use("/api/auth", routerAuth);
 
