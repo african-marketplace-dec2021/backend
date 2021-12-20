@@ -236,3 +236,34 @@ describe('[8] - describe verifyStringAndLength', () => {
         expect(helper.verifyStringAndLength(varEmptyArray, 2, 100)).toBe(false);
     })
 })
+
+describe('[9] - describe verifyDecimal', () => {
+    it('[9-1] - verifyDecimal return false for an integer ', () => {
+        expect(helper.verifyDecimal(varInteger)).toBe(true);
+    })
+    it('[9-2] - verifyDecimal return true for number', () => {
+        expect(helper.verifyDecimal(varNumber)).toBe(true);
+    })
+    it('[9-3] - verifyDecimal return true for an decimal', () => {
+        expect(helper.verifyDecimal(varDecimal)).toBe(true);
+    })
+    it('[9-4] - verifyDecimal return false for an undefined object ', () => {
+        expect(helper.verifyDecimal(varUndefined)).toBe(false);
+    })
+    it('[9-5] - verifyDecimal return false for a string ', () => {
+        expect(helper.verifyDecimal(varString)).toBe(false);
+    })
+    it('[9-6] - verifyDecimal return false for an empty string ', () => {
+        expect(helper.verifyDecimal(varEmptyString)).toBe(false);
+    })
+    it('[9-7] - verifyDecimal return false for an array', () => {
+        expect(helper.verifyDecimal(varArray)).toBe(false);
+    })
+    it('[9-8] - verifyDecimal return false for an empty array', () => {
+        expect(helper.verifyDecimal(varEmptyArray)).toBe(false);
+    })
+    it('[9-9] - verifyDecimal return false for object', () => {
+        expect(helper.verifyDecimal(varObj)).toBe(false);
+    })
+    
+})

@@ -11,6 +11,11 @@ function verifyInterger(input){
     return Number.isInteger(input) && regex.test(input) === false && input > 0;
 }
 
+function verifyDecimal(input){
+    let regex = /^[-+]?[0-9]+\.[0-9]+$/;
+    return Number.isInteger(input) || regex.test(input)
+}
+
 function isEmptyString(input) {
     return isString(input) && input.trim() === "";
 }
@@ -36,4 +41,4 @@ function processBodyToObject(keys, req_object){
     return obj;
 }
 
-module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger, processBodyToObject, verifyStringAndLength };
+module.exports = { isUndefined, isString, isEmptyString, verifyString, isEmptyArray, verifyInterger, processBodyToObject, verifyStringAndLength, verifyDecimal };
