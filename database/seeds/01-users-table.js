@@ -3,11 +3,10 @@ exports.seed = function(knex) {
     .truncate()
     .then(function () {
       return knex('users').insert([
-        {id: 1, username:"user1", password:"password1"},
-        {id: 2, username:"user2", password:"password2"},
-        {id: 3, username:"user3", password:"password3"},
-        {id: 4, username:"user4", password:"password4"},
-        {id: 5, username:"tomtom", password:"$2b$10$13/VWNhhwFQrYXhUvH4A7OKPnYwPBHPF77H2yCrhCjE0kQ910PFF2"},
+        {id: 1, username:"admin", password:"admin", role:"admin"},
+        {id: 2, username:"buyer", password:"buyer", role:"buyer"},
+        {id: 3, username:"seller", password:"seller", role:"seller"},
+        {id: 4, username:"tomtom", password:"$2b$10$13/VWNhhwFQrYXhUvH4A7OKPnYwPBHPF77H2yCrhCjE0kQ910PFF2", role:"admin"},
       ]);
     });
 };

@@ -5,6 +5,8 @@ exports.up = function(knex, Promise) {
             table.string("name").notNull();
             table.string("description").notNull();
             table.decimal("price").notNull();
+            table.integer("category_id").notNull();
+            // table.foreign("category_id").references("id").inTable("categories");
         })
 };
 

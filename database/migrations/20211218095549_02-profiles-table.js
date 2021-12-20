@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
           table.string("middle_name");
           table.string("last_name").notNull();
           table.string("email").notNull();
-          table.string("user_type");
           table.integer("user_id").notNull();
         //   table.foreign("user_id").references("id").inTable("users");
       })
