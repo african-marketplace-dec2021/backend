@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyBuyerProfileId, verifySellerProfileId} = require("./middleware");
+const {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -21,10 +21,10 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", verifyNewObject, verifyBuyerProfileId, verifySellerProfileId, async (req, res, next) => {
+router.post("/", verifyNewObject, verifyBuyerUserId, verifySellerUserId, async (req, res, next) => {
     try{
-        const {buyer_profile_id, seller_profile_id} = req.body;
-        const array = await model.add({buyer_profile_id, seller_profile_id});
+        const {buyer_user_id, seller_user_id} = req.body;
+        const array = await model.add({buyer_user_id, seller_user_id});
         res.status(201).json(array);
     }catch(err){
         next(err);
@@ -32,7 +32,7 @@ router.post("/", verifyNewObject, verifyBuyerProfileId, verifySellerProfileId, a
     
 })
 
-router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerProfileId, verifySellerProfileId, async (req, res, next)=>{
+router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller, async (req, res, next)=>{
     try{
         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
         res.status(201).json({result});
