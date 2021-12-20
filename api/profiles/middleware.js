@@ -70,20 +70,6 @@ async function verifyUserId(req, res, next){
 
 }
 
-async function verifyUserType(req, res, next){
-    try{
-        const{user_type} = req.body;
-        if(isUndefined(user_type)){
-            req.body.newProfile['user_type'] = 'user';
-            next();
-        }else{
-            next();
-        }
-    }catch(err){
-        next(err);
-    }
-}
-
 async function verifyModifiedObject (req, res, next){
     try{
         //implement verify new object
@@ -92,7 +78,6 @@ async function verifyModifiedObject (req, res, next){
             {name:'last_name', type:'string'},
             {name:'middle_name', type:'string'},
             {name:'email', type:'string'},
-            {name:'user_type', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         next();
@@ -119,4 +104,4 @@ async function isInTable(filtered){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, isInTable, isIdInTable, verifyUserId, verifyUserType};
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, isInTable, isIdInTable, verifyUserId};
