@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const routerUsers = require("./users/router");
 const routerProfiles = require("./profiles/router");
+const routerCategories = require("./categories/router");
 const routerProducts = require("./products/router");
 const routerAuth = require("./auth/router");
 const {errorHandler} = require("./errorHandler");
@@ -20,6 +21,7 @@ server.get("/", (req, res)=>{
 // server.use("/api/profiles", authorizedOnly, routerProfiles);
 server.use("/api/users", routerUsers);
 server.use("/api/profiles", routerProfiles);
+server.use("/api/categories", routerCategories);
 server.use("/api/products", routerProducts);
 server.use("/api/auth", routerAuth);
 

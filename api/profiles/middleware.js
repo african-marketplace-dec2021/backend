@@ -80,7 +80,11 @@ async function verifyModifiedObject (req, res, next){
             {name:'email', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        next();
+        if(Object.keys(req.body.modifiedObject).length === 0){
+            res.status(400).json({message:"no valid column name detected"});
+        }else{
+            next();
+        }
     }catch(err){
         next(err);
     }

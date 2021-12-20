@@ -1,5 +1,5 @@
 const model = require("./model");
-const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength} = require("../helper");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -32,8 +32,16 @@ async function isIdInTable(id){
 
 async function verifyNewObject (req, res, next){
     try{
-        //implement verify new object
-        next();
+        const {name, description} = req.body;
+        if (isUndefined(name) || isUndefined(description)){
+            res.status(400).json({message:"require name and description"});
+        }else if(verifyStringAndLength(name, 3, 30) === false){
+            res.status(400).json({message:"name be between 3 and 30 in length"});
+        }else if(verifyStringAndLength(description, 3, 300) === false){
+            res.status(400).json({message:"name be between 3 and 300 in length"});
+        }else{
+            next();
+        }
     }catch(err){
         next(err);
     }
@@ -49,11 +57,15 @@ async function verifyModifiedObject (req, res, next){
     try{
         //implement verify new object
         const keys = [
-            {name:'first_name', type:'string'},
-            {name:'last_name', type:'string'}
+            {name:'name', type:'string'},
+            {name:'description', type:'string'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        next();
+        if(Object.keys(req.body.modifiedObject).length === 0){
+            res.status(400).json({message:"no valid column name detected"});
+        }else{
+            next();
+        }
     }catch(err){
         next(err);
     }
