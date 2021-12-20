@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyNewObject, verifyModifiedObject} = require("./middleware");
+const {verifyExistingId, verifyNewObject: verifyNewTransaction, verifyModifiedObject, verifyProductId, verifyOrderId, verifyPositiveQuantity} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -21,17 +21,18 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", verifyNewObject, async (req, res, next) => {
+router.post("/", verifyNewTransaction, verifyProductId, verifyOrderId, async (req, res, next) => {
     try{
-        //implement your code here
-        res.status(503).json({message:`path ${req.path}, POST not ready`});
+        const {product_id, order_id, quantity} = req.body;
+        const array = await model.add({product_id, order_id, quantity});
+        res.status(201).json(array);
     }catch(err){
         next(err);
     }
     
 })
 
-router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
+router.put("/:id", verifyExistingId, verifyModifiedObject, verifyProductId, verifyOrderId, verifyPositiveQuantity, async (req, res, next)=>{
     try{
         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
         res.status(201).json({result});

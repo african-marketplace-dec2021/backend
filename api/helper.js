@@ -8,7 +8,7 @@ function isString(input) {
 
 function verifyInterger(input){
     let regex = /^[-+]?[0-9]+\.[0-9]+$/;
-    return Number.isInteger(input) || regex.test(input);
+    return Number.isInteger(input) && regex.test(input) === false && input > 0;
 }
 
 function isEmptyString(input) {

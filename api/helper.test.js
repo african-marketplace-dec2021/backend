@@ -118,7 +118,7 @@ describe('[6] - describe verifyInterger', () => {
         expect(helper.verifyInterger(varNumber)).toBe(true);
     })
     it('[6-3] - verifyInterger return false for an decimal', () => {
-        expect(helper.verifyInterger(varDecimal)).toBe(true);
+        expect(helper.verifyInterger(varDecimal)).toBe(false);
     })
     it('[6-4] - verifyInterger return false for an undefined object ', () => {
         expect(helper.verifyInterger(varUndefined)).toBe(false);
