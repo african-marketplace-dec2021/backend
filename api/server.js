@@ -6,6 +6,8 @@ const routerUsers = require("./users/router");
 const routerProfiles = require("./profiles/router");
 const routerCategories = require("./categories/router");
 const routerProducts = require("./products/router");
+const routerOrders = require("./orders/router");
+const routerTransactions = require("./transactions/router");
 const routerAuth = require("./auth/router");
 const {errorHandler} = require("./errorHandler");
 const {authorizedOnly} = require("./auth/middleware");
@@ -23,6 +25,8 @@ server.use("/api/users", routerUsers);
 server.use("/api/profiles", routerProfiles);
 server.use("/api/categories", routerCategories);
 server.use("/api/products", routerProducts);
+server.use("/api/orders", routerOrders);
+server.use("/api/transactions", routerTransactions);
 server.use("/api/auth", routerAuth);
 
 server.use('*', (req, res)=>{
