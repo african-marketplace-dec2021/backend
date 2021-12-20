@@ -1,7 +1,7 @@
 const express = require("express");
 const router =  express();
 const model = require("./model");
-const {verifyExistingId, verifyNewObject, verifyModifiedObject} = require("./middleware");
+const {verifyExistingId, verifyNewObject, verifyModifiedObject, verifyCategoryId} = require("./middleware");
 
 router.get("/", async (req, res, next) => {
     try{
@@ -21,7 +21,7 @@ router.get("/:id", verifyExistingId, async (req, res, next) => {
     }
 })
 
-router.post("/", verifyNewObject, async (req, res, next) => {
+router.post("/", verifyNewObject, verifyCategoryId, async (req, res, next) => {
     try{
         const result = await model.add(req.body.newProduct);
         res.status(200).json(result);
@@ -31,7 +31,7 @@ router.post("/", verifyNewObject, async (req, res, next) => {
     
 })
 
-router.put("/:id", verifyExistingId, verifyModifiedObject, async (req, res, next)=>{
+router.put("/:id", verifyExistingId, verifyModifiedObject, verifyCategoryId, async (req, res, next)=>{
     try{
         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
         res.status(201).json({result});

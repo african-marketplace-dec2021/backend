@@ -1,4 +1,5 @@
 const model = require("./model");
+const middlewareCategories = require("../categories/middleware");
 const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength} = require("../helper");
 
 async function verifyExistingId (req, res, next){
@@ -32,17 +33,19 @@ async function isIdInTable(id){
 
 async function verifyNewObject (req, res, next){
     try{
-        const {name, price, description} = req.body
-        if(isUndefined(name) || isUndefined(price) || isUndefined(description)){
-            res.status(400).json({message:"require name, description, and price"});
+        const {name, price, description, category_id} = req.body
+        if(isUndefined(name) || isUndefined(price) || isUndefined(description) || isUndefined(category_id)){
+            res.status(400).json({message:"require name, description, price, and category_id"});
         }else if(verifyStringAndLength(name, 3, 30) === false){
             res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
         }else if(verifyStringAndLength(description, 3, 1000) === false){
             res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
         }else if(verifyInterger(price) === false){
             res.status(400).json({message:"price must be a number"});
+        }else if(verifyInterger(category_id) === false){
+            res.status(400).json({message:"category_id must be a number"});
         }else{
-            req.body.newProduct = {name, price, description};
+            req.body.newProduct = {name, price, description, category_id};
             next();
         }
     }catch(err){
@@ -50,14 +53,30 @@ async function verifyNewObject (req, res, next){
     }
 }
 
+async function verifyCategoryId (req, res, next){
+    const {category_id} = req.body;
+    const boolean = await middlewareCategories.isIdInTable(category_id);
+    if (boolean === false){
+        res.status(404).json({message:`category_id ${category_id} not found`});
+    }else{
+        next();
+    }
+}
+
 async function verifyModifiedObject (req, res, next){
     try{
         const keys = [
             {name:'name', type:'string'},
-            {name:'price', type:'number'}
+            {name:'price', type:'number'},
+            {name:'category_id', type:'number'},
+            {name:'description', type:'string'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        next();
+        if(Object.keys(req.body.modifiedObject).length === 0){
+            res.status(400).json({message:"no valid column name detected"});
+        }else{
+            next();
+        }
     }catch(err){
         next(err);
     }
@@ -81,4 +100,4 @@ async function isInTable(filtered){
     }
 }
 
-module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, isInTable, isIdInTable};
+module.exports = {verifyExistingId, verifyNewObject, verifyModifiedObject, isInTable, isIdInTable, verifyCategoryId};
