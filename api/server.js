@@ -9,6 +9,8 @@ const routerProducts = require("./products/router");
 const routerOrders = require("./orders/router");
 const routerTransactions = require("./transactions/router");
 const routerAuth = require("./auth/router");
+const routerSeller = require("./seller/router");
+const routerBuyer = require("./buyer/router");
 const {errorHandler} = require("./errorHandler");
 const {authorizedOnly} = require("./auth/middleware");
 
@@ -27,6 +29,8 @@ server.use("/api/categories", routerCategories);
 server.use("/api/products", routerProducts);
 server.use("/api/orders", routerOrders);
 server.use("/api/transactions", routerTransactions);
+server.use("/api/buyer", routerBuyer);
+server.use("/api/seller", routerSeller);
 server.use("/api/auth", routerAuth);
 
 server.use('*', (req, res)=>{
