@@ -34,21 +34,15 @@ describe("[1] describe endpoint /api/users", ()=>{
         const actual = result.body.message;
         expect(actual).toMatch(/not found/);
     })
-    test("[1-3-1] Happy, POST /api/users/, create a buyer successfully", async ()=>{
-        /**
-         * create a buyer
-         */
+    test("[1-3-1] Happy, POST /api/users/, successfully create a buyer", async ()=>{
         const newUser = { username: "happy", password:"happy", role:"buyer"};
         const response = await request(app).post("/api/users/").send(newUser);
         
         expect(response.body.length).toEqual(1);
         expect(response.body[0]).toHaveProperty("username");
         expect(response.body[0]).toHaveProperty("password");
-
-        /**
-         * create a seller
-         */
-
+    })
+    test("[1-3-1] Happy, POST /api/users/, successfully create a seller", async ()=>{
         const newUser2 = { username: "happy2", password:"happy2", role:"seller"};
         const response2 = await request(app).post("/api/users/").send(newUser2);
 
@@ -56,15 +50,34 @@ describe("[1] describe endpoint /api/users", ()=>{
         expect(response2.body[0]).toHaveProperty("username");
         expect(response2.body[0]).toHaveProperty("password");
     })
-    test("[1-3-2] Sad, POST /api/users/, result in an error", async ()=>{
-
-        /**
-         * cannot create a user - due to insufficient input
-         */
+    test("[1-3-2] Sad, POST /api/users/, cannot create a user - due to insufficient input", async ()=>{
         const newUser = { username: "happy", password:"happy"};
         const response = await request(app).post("/api/users/").send(newUser);
         
         expect(response.body.message).toMatch(/require username, password, and role/);
+    })
+    test("[1-3-3] Sad, POST /api/users/, cannot create a user - due to short username", async ()=>{ 
+        const newUser = { username: "ha", password:"happy", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
         
+        expect(response.body.message).toMatch(/username and password must/);      
+    })
+    test("[1-3-4] Sad, POST /api/users/, cannot create a user - due to short password", async ()=>{ 
+        const newUser = { username: "happy", password:"ha", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        
+        expect(response.body.message).toMatch(/username and password must/);      
+    })
+    test("[1-3-5] Sad, POST /api/users/, cannot create a user - due to invalid role", async ()=>{ 
+        const newUser = { username: "happy", password:"happy", role:"role"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        
+        expect(response.body.message).toMatch(/role must be /);      
+    })
+    test("[1-3-6] Sad, POST /api/users/, cannot create a user - due to unavailable username", async ()=>{ 
+        const newUser = { username: "happy", password:"happy", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        
+        expect(response.body.message).toMatch(/username happy is not available/);      
     })
 })

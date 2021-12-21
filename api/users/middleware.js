@@ -69,7 +69,7 @@ async function verifyNewObject (req, res, next){
         if (isUndefined(username)  || isUndefined(password) || isUndefined(role)){
             res.status(400).json({message:"require username, password, and role, role must be 'buyer' or 'seller'"})
         }else if (isEmptyString(username) ||  isEmptyString(password) || username.length < 5 || password.length < 5 || username.length > 20 || password.length > 20){
-            res.status(400).json({message:"username and password msut be between 5 and 20 characters"});
+            res.status(400).json({message:"username and password must be between 5 and 20 characters"});
         }else if (isEmptyString(role)){
             res.status(400).json({message:"role cannot be empty"});
         }else if ((role === 'buyer' || role === 'seller') === false){
