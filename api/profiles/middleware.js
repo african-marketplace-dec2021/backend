@@ -90,15 +90,6 @@ async function verifyModifiedObject (req, res, next){
     }
 }
 
-async function isIdInTable(id){
-    const array = await model.getById(id);
-    if(isEmptyArray(array)){
-        return false;
-    }else{
-        return true;
-    }
-}
-
 async function isInTable(filtered){
     const array = await model.getBy(filtered);
     if(isEmptyArray(array)){
