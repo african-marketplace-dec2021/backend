@@ -86,6 +86,37 @@ describe("[1] describe endpoint /api/categories", ()=>{
         expect(response2.body).toHaveProperty("message");
         expect(response2.body.message).toMatch(/description must be/);
     })
+    test("[1-4-4] Sad, PUT /api/categories/, fail to modify a category due to invalid description", async ()=>{
+        const newCategory = {"name":"cat 6", "description":"no description"};
+        const response = await request(app).post("/api/categories/").send(newCategory);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/categories/${id}`).send({});
 
+        expect(response.body.length).toBe(1);
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/no valid/);
+    })
+    test("[1-5-1] Happy, DELETE /api/categories/, successfully delete a category ", async ()=>{
+        const newCategory = {"name":"cat 6", "description":"no description"};
+        const response = await request(app).post("/api/categories/").send(newCategory);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/categories/${id}`);
+
+        expect(response.body.length).toBe(1);
+        expect(response2.body).toHaveProperty("result");
+        expect(response2.body.result).toBe(1);
+    })
+    test("[1-5-2] Sad, DELETE /api/categories/, fail to delete due to id not found ", async ()=>{
+        const response2 = await request(app).delete(`/api/categories/100`);
+
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/id 100 not found/);
+    })
+    test("[1-5-3] Sad, DELETE /api/categories/, fail to delete an invalid category ", async ()=>{
+        const response2 = await request(app).delete(`/api/categories/100s`);
+
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/invalid id/);
+    })
 
 })
