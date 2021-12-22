@@ -10,4 +10,5 @@ module.exports = {
     BCRYPT_ROUND : 10, //needed in the production
     SECRET : "secret key", //needed in the production
     NODE_ENV:"production", //needed in the production
+    
 }
