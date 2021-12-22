@@ -33,7 +33,7 @@ async function isIdInTable(id){
 
 async function verifyNewObject (req, res, next){
     try{
-        const {name, price, description, category_id} = req.body
+        const {name, price, description, category_id, image_url} = req.body
         if(isUndefined(name) || isUndefined(price) || isUndefined(description) || isUndefined(category_id)){
             res.status(400).json({message:"require fields : name, description, price, and category_id"});
         }else if(verifyStringAndLength(name, 3, 30) === false){
@@ -45,7 +45,7 @@ async function verifyNewObject (req, res, next){
         }else if(verifyInterger(category_id) === false){
             res.status(400).json({message:"category_id must be a number"});
         }else{
-            req.body.newProduct = {name, price, description, category_id};
+            req.body.newProduct = {name, price, description, category_id, image_url: isUndefined(image_url)?null:image_url};
             next();
         }
     }catch(err){
@@ -70,6 +70,7 @@ async function verifyModifiedObject (req, res, next){
             {name:'price', type:'number'},
             {name:'category_id', type:'number'},
             {name:'description', type:'string'},
+            {name:'image_url', type:'string'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         const {name, price, description, category_id} = req.body

@@ -97,7 +97,8 @@ async function verifyModifiedObject (req, res, next){
         const keys = [
             {name:'order_id', type:'number'},
             {name:'product_id', type:'number'},
-            {name:'quantity', type:'number'}
+            {name:'quantity', type:'number'},
+            {name:'status', type:'string'},
         ];
         const {product_id, order_id, quantity} = req.body;
         req.body.modifiedObject = processBodyToObject(keys, req.body);

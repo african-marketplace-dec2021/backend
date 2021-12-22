@@ -91,10 +91,11 @@ async function verifyModifiedObject (req, res, next){
     try{
         const keys = [
             {name:'buyer_user_id', type:'number'},
-            {name:'seller_user_id', type:'number'}
+            {name:'seller_user_id', type:'number'},
+            {name:'status', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        const {buyer_user_id, seller_user_id} = req.body;
+        const {buyer_user_id, seller_user_id, status} = req.body;
         if (isUndefined(buyer_user_id) || isUndefined(seller_user_id)){
             res.status(400).json({message:"require fields : buyer_user_id and seller_user_id"});
         }else if(verifyInterger(buyer_user_id) === false){
