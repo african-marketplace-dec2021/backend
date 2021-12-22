@@ -35,7 +35,12 @@ describe("[1] describe endpoint /api/transactions", ()=>{
         expect(response.body.message).toMatch(/invalid id/);
     })
     test("[1-3-1] Happy, POST /api/transactions/, successfully created a new profile with middle_name", async ()=>{
-
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response.body[0]).toHaveProperty("order_id");
+        expect(response.body[0]).toHaveProperty("product_id");
+        expect(response.body[0]).toHaveProperty("quantity");
     })
     test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
 

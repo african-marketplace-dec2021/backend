@@ -3,7 +3,6 @@ exports.up = function(knex, Promise) {
         .createTable("transactions", table=>{
             table.increments("id").primary();
             table.integer("quantity").notNull();
-
             table.integer("product_id").notNull();
             table.integer("order_id").notNull();
 
