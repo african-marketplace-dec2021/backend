@@ -5,12 +5,12 @@ const db = require("../database/db-config");
 console.log("NODE_ENV = ", process.env.NODE_ENV);
 
 beforeAll(async ()=>{
-    // await db.migrate.rollback();
-    // await db.migrate.latest();
-})
-beforeEach(async ()=>{
     await db.migrate.rollback();
     await db.migrate.latest();
+})
+beforeEach(async ()=>{
+    // await db.migrate.rollback();
+    // await db.migrate.latest();
     await db.seed.run();
 })
 
