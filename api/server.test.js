@@ -4,7 +4,8 @@ const db = require("../database/db-config");
 
 console.log("NODE_ENV = ", process.env.NODE_ENV);
 
-beforeAll(async ()=>{
+// beforeAll(async ()=>{
+beforeEach(async ()=>{
     await db.migrate.rollback();
     await db.migrate.latest();
     await db.seed.run();
@@ -75,9 +76,53 @@ describe("[1] describe endpoint /api/users", ()=>{
         expect(response.body.message).toMatch(/role must be /);      
     })
     test("[1-3-6] Sad, POST /api/users/, cannot create a user - due to unavailable username", async ()=>{ 
+
         const newUser = { username: "happy", password:"happy", role:"buyer"};
+        await request(app).post("/api/users/").send(newUser);
         const response = await request(app).post("/api/users/").send(newUser);
         
         expect(response.body.message).toMatch(/username happy is not available/);      
+    })
+    test("[1-4-1] Happy, PUT /api/users/, successfully change username", async ()=>{ 
+        const newUser = { username: "jamjam", password:"jamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).put(`/api/users/${response.body[0].id}`).send({username:"jamjamjam"})
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.result).toEqual(1);      
+    })
+    test("[1-4-2] Happy, PUT /api/users/, successfully change password", async ()=>{ 
+        const newUser = { username: "hamjam", password:"hamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).put(`/api/users/${response.body[0].id}`).send({password:"hamhamjam"})
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.result).toBe(1);      
+    })
+    test("[1-4-3] Sad, PUT /api/users/, fail due to no fields", async ()=>{ 
+        const newUser = { username: "qamqam", password:"hamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).put(`/api/users/${response.body[0].id}`).send({usernamee:"hamhamjam",passwordd:"hamhamjam"})
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/no valid column name/);
+    })
+    test("[1-4-4] Happy, PUT /api/users/, successfully change password", async ()=>{ 
+        await request(app).post("/api/users/").send({ username: "happy", password:"hamjam", role:"buyer"});
+        const newUser = { username: "qammy", password:"hamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).put(`/api/users/${response.body[0].id}`).send({username:"happy"})
+        console.log("response2.body = ", response2);
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/username happy is not available/);;      
     })
 })

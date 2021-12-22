@@ -52,9 +52,13 @@ async function isInTable(filtered){
 
 async function verifyUniqueUsername(req, res, next){
     try{
-        const boolean = await isInTable({'username':req.body.username});
-        if(boolean){
-            res.status(400).json({message:`username ${req.body.username} is not available`});
+        if(isUndefined (req.body.username) === false){
+            const boolean = await isInTable({'username':req.body.username});
+            if(boolean){
+                res.status(400).json({message:`username ${req.body.username} is not available`});
+            }else{
+                next();
+            }
         }else{
             next();
         }
