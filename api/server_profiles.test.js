@@ -120,23 +120,48 @@ describe("[1] describe endpoint /api/profiles", ()=>{
         const response2 = await request(app).put(`/api/profiles/${id}`).send({"first_name":""});
 
         expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/first_name must/);
     })
 
     test("[1-4-3] Sad, PUT /api/profiles/, fail to create a profile due to incorrect last name", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middlename":"tomtom","email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/profiles/${id}`).send({"last_name":""});
 
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/last_name must/);
     })
 
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect middle name", async ()=>{
+    test("[1-4-4] Sad, PUT /api/profiles/, fail to create a profile due to incorrect email", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middlename":"tomtom","email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/profiles/${id}`).send({"email":""});
 
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/email must/);
     })
 
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect first name", async ()=>{
+    test("[1-5-1] Happy, DELETE /api/profiles/, successfully delete a profile", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middlename":"tomtom","email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/profiles/${id}`);
 
+        expect(response2.body).toHaveProperty("result");
+        expect(response2.body.result).toBe(1);
     })
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect email", async ()=>{
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to delete a non-existing profile", async ()=>{
+        const response2 = await request(app).delete(`/api/profiles/111`);
 
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/not found/);
     })
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due user_id not found", async ()=>{
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to delete due to invalid id", async ()=>{
+        const response2 = await request(app).delete(`/api/profiles/111sss`);
 
+        expect(response2.body).toHaveProperty("message");
+        expect(response2.body.message).toMatch(/invalid id/);
     })
 })

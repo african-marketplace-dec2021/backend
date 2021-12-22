@@ -73,7 +73,6 @@ async function verifyUserId(req, res, next){
 
 async function verifyModifiedObject (req, res, next){
     try{
-        //implement verify new object
         const keys = [
             {name:'first_name', type:'string'},
             {name:'last_name', type:'string'},
@@ -81,8 +80,15 @@ async function verifyModifiedObject (req, res, next){
             {name:'email', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
+        const {email, first_name, last_name, middle_name} = req.body;
         if(Object.keys(req.body.modifiedObject).length === 0){
             res.status(400).json({message:"no valid column name detected"});
+        }else if(!isUndefined(email) && verifyStringAndLength(email, 3, 30) === false){
+            res.status(400).json({message:`email must be between 3 and 30 characters long`});
+        }else if(!isUndefined(first_name) && verifyStringAndLength(first_name, 3, 30) === false){
+            res.status(400).json({message:`first_name must be between 3 and 30 characters long`});            
+        }else if(!isUndefined(last_name) && verifyStringAndLength(last_name, 3, 30) === false){
+            res.status(400).json({message:`last_name must be between 3 and 30 characters long`});
         }else{
             next();
         }
