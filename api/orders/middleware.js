@@ -35,11 +35,11 @@ async function verifyNewObject (req, res, next){
     try{
         const {buyer_user_id, seller_user_id} = req.body;
         if (isUndefined(buyer_user_id) || isUndefined(seller_user_id)){
-            res.status(400).json({message:"require buyer_user_id and seller_user_id"});
+            res.status(400).json({message:"require fields : buyer_user_id and seller_user_id"});
         }else if(verifyInterger(buyer_user_id) === false){
-            res.status(400).json({message:"invalid buyer_user_id"});
+            res.status(400).json({message:"buyer_user_id must be positive integer"});
         }else if (verifyInterger(seller_user_id) === false){
-            res.status(400).json({message:"invalid seller_user_id"});
+            res.status(400).json({message:"seller_user_id must be positive integer"});
         }else if (seller_user_id === buyer_user_id){
             res.status(400).json({message:"seller_user_id cannot equal to buyer_user_id"});
         }else{

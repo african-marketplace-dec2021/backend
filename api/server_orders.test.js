@@ -35,6 +35,41 @@ describe("[1] describe endpoint /api/orders", ()=>{
         expect(response.body.message).toMatch(/invalid id/);
     })
     test("[1-3-1] Happy, POST /api/orders/, successfully created a new profile with middle_name", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body[0]).toHaveProperty("id")
+        expect(response.body[0]).toHaveProperty("buyer_user_id")
+        expect(response.body[0]).toHaveProperty("seller_user_id")
 
+    })
+    test("[1-3-2] Sad, POST /api/orders/, fail to create a new orders due to  insufficient fields", async ()=>{
+        const newOrder = {};
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/require fields : /);
+    })
+    test("[1-3-3] Sad, POST /api/orders/, fail to create a new orders due to  invalid seller_user_id", async ()=>{
+        const newOrder = {"seller_user_id":"1", "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/seller_user_id must be/);
+    })
+    test("[1-3-4] Sad, POST /api/orders/, fail to create a new orders due to  invalid buyer_user_id", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":"2" };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/buyer_user_id must be/);
+    })
+    test("[1-3-5] Sad, POST /api/orders/, fail to create a new orders due to non existence seller_user_id", async ()=>{
+        const newOrder = {"seller_user_id":10, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/seller_user_id 10 not found/);
+    })
+    test("[1-3-6] Sad, POST /api/orders/, fail to create a new orders due to non existence buyer_user_id", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":20 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/buyer_user_id 20 not found/);
+    })
+    test("[1-3-7] Sad, POST /api/orders/, fail to create a new orders due to seller_user_id cannot equate to buyer_user_id", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":1 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        expect(response.body.message).toMatch(/seller_user_id cannot equal to buyer_user_id/);
     })
 })
