@@ -77,23 +77,75 @@ describe("[1] describe endpoint /api/products", ()=>{
         expect(response.body.message).toMatch(/not found/);
         
     })
-    test("[1-4-1] Happy, POST /api/products/, successfully modify a product ", async ()=>{
-        
+    test("[1-4-1] Happy, PUT /api/products/, successfully modify a product ", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"name":"product 1", "description":"no description", "category_id":4, "price":10.99});
+        expect(response2.body.result).toBe(1);
     })
-    test("[1-4-2] Sad, POST /api/products/, fail due to invalid name", async ()=>{
-        
+    test("[1-4-2] Sad, PUT /api/products/, fail due to invalid name", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"name":""});
+        expect(response2.body.message).toMatch(/name must/);
     })
-    test("[1-4-3] Sad, POST /api/products/, fail due to invalid description", async ()=>{
-        
+    test("[1-4-3] Sad, PUT /api/products/, fail due to invalid description", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"description":""});
+        expect(response2.body.message).toMatch(/description must/);
     })
-    test("[1-4-4] Sad, POST /api/products/, fail due to invalid price", async ()=>{
-        
+    test("[1-4-4] Sad, PUT /api/products/, fail due to invalid price", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"price":"10.99"});
+        expect(response2.body.message).toMatch(/price must/);
     })
-    test("[1-4-5] Sad, POST /api/products/, fail due to invalid category_id", async ()=>{
-        
+    test("[1-4-5] Sad, PUT /api/products/, fail due to invalid category_id", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"category_id":"400"});
+        expect(response2.body.message).toMatch(/category_id must/);
     })
-    test("[1-4-6] Sad, POST /api/products/, fail due to non exsistence category_id", async ()=>{
-        
+    test("[1-4-6] Sad, PUT /api/products/, fail due to non exsistence category_id", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send({"category_id":400});
+        expect(response2.body.message).toMatch(/category_id 400 not found/);
     })
 
+    test("[1-4-7] Sad, PUT /api/products/, fail due to no fields", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/products/${id}`).send();
+        expect(response2.body.message).toMatch(/no valid column/);
+    })
+    test("[1-5-1] Happy, DELETE /api/products/, successfully delete a product", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/products/${id}`);
+        expect(response2.body.result).toBe(1);
+    });
+    test("[1-5-2] Sad, DELETE /api/products/, fail due to invalid id", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/products/${id}zz`);
+        expect(response2.body.message).toMatch(/invalid id/)
+    })
+    test("[1-5-3] Sad, DELETE /api/products/, fail due to non-existing id", async ()=>{
+        const newProduct = {"name":"product 1", "description":"no description", "category_id":2, "price":10.99};
+        const response = await request(app).post("/api/products/").send(newProduct);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/products/${id}11`);
+        expect(response2.body.message).toMatch(/id 611 not found/)
+    })
 })
