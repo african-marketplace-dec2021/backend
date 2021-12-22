@@ -10,10 +10,9 @@ const {BCRYPT_ROUND} = require("../../env");
 router.post("/register", verifyNewUser, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password, role} = req.body;
-        // ???????????? why process.env.BCRYPT_ROUND not working on heroku ???????????????????????????
-        // const hashsedPassword = bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND);
-        // ???????????? why process.env.BCRYPT_ROUND not working on heroku ???????????????????????????
-        const hashsedPassword = bcrypt.hashSync(password, BCRYPT_ROUND);
+        const hashsedPassword = bcrypt.hashSync(password, Number(process.env.BCRYPT_ROUND));
+
+        
         const result = await modelUsers.add({username, password: hashsedPassword, role});
         res.status(201).json(result);
     }catch(err){
