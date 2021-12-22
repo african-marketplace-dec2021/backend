@@ -34,11 +34,11 @@ async function verifyNewObject (req, res, next){
     try{
         const {name, description} = req.body;
         if (isUndefined(name) || isUndefined(description)){
-            res.status(400).json({message:"require name and description"});
+            res.status(400).json({message:"require fields : name and description"});
         }else if(verifyStringAndLength(name, 3, 30) === false){
-            res.status(400).json({message:"name be between 3 and 30 in length"});
+            res.status(400).json({message:"name must be between 3 and 30 in length"});
         }else if(verifyStringAndLength(description, 3, 300) === false){
-            res.status(400).json({message:"name be between 3 and 300 in length"});
+            res.status(400).json({message:"name must be between 3 and 300 in length"});
         }else{
             next();
         }
@@ -47,22 +47,20 @@ async function verifyNewObject (req, res, next){
     }
 }
 
-/**
- * example keys = [
-            {name:'username', type:'string'},
-            {name:'password', type:'string'},
-    ]
- */
 async function verifyModifiedObject (req, res, next){
     try{
-        //implement verify new object
         const keys = [
             {name:'name', type:'string'},
             {name:'description', type:'string'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
+        const {name, description} = req.body;
         if(Object.keys(req.body.modifiedObject).length === 0){
             res.status(400).json({message:"no valid column name detected"});
+        }else if(!isUndefined(name) && verifyStringAndLength(name, 3, 30) === false){
+            res.status(400).json({message:"name must be between 3 and 30 in length"});
+        }else if(!isUndefined(description) && verifyStringAndLength(description, 3, 300) === false){
+            res.status(400).json({message:"description must be between 3 and 300 in length"});
         }else{
             next();
         }
