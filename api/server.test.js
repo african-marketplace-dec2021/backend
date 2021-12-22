@@ -151,4 +151,14 @@ describe("[1] describe endpoint /api/users", ()=>{
         expect(response3.body).toHaveProperty("message");
         expect(response3.body.message).toMatch(/invalid id/);
     })
+    test("[1-5-2] Sad, DELETE /api/users/, cannt delete a user due to non existing user id", async ()=>{ 
+        const newUser = { username: "jamjam", password:"jamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).delete(`/api/users/100`);
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/id 100 not found/);
+    })
 })
