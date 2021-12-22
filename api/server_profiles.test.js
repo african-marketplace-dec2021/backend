@@ -68,7 +68,7 @@ describe("[1] describe endpoint /api/profiles", ()=>{
         const newProfile = {"first_name":"tommy", "last_name":"tommy", "middle_name":"tommy", "email":"tommy@mail.com"};
         const response = await request(app).post("/api/profiles/").send(newProfile);
         
-        expect(response.body.message).toMatch(/require fields: first_name, last_name, email, user_id. Optional fields : middle_name/);  
+        expect(response.body.message).toMatch(/require fields/);  
     })
     test("[1-3-4] Sad, POST /api/profiles/, fail to create a profile due to invalid first_name", async ()=>{
         const newProfile = {"first_name":"", "last_name":"tommy", "middle_name":"tommy", "email":"tommy@mail.com", "user_id":1};
