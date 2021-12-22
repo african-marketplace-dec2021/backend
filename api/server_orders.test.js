@@ -18,6 +18,27 @@ describe("sanity", ()=>{
 })
 
 describe("[1] describe endpoint /api/orders", ()=>{
+
+    describe("[1-1] describe endpoint GET /api/orders/", ()=>{ 
+
+    })
+
+    describe("[1-2] describe endpoint GET /api/orders/:id", ()=>{ 
+
+    })
+
+    describe("[1-3] describe endpoint POST /api/orders/", ()=>{ 
+
+    })
+
+    describe("[1-4] describe endpoint PUT /api/orders/:id", ()=>{ 
+
+    })
+
+    describe("[1-5] describe endpoint DELETE /api/orders/:id", ()=>{ 
+
+    })
+
     test("[1-1-1] Happy, GET /api/orders/ successfully", async ()=>{
         const response = await request(app).get("/api/orders/");
         expect(response.body.length).toBe(1);

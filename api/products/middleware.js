@@ -1,6 +1,6 @@
 const model = require("./model");
 const middlewareCategories = require("../categories/middleware");
-const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength, verifyDecimal} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength, verifyDecimal, verifyString} = require("../helper");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -69,7 +69,7 @@ async function verifyModifiedObject (req, res, next){
             {name:'name', type:'string'},
             {name:'price', type:'number'},
             {name:'category_id', type:'number'},
-            {name:'description', type:'string'}
+            {name:'description', type:'string'},
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
         const {name, price, description, category_id} = req.body
