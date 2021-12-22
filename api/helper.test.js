@@ -258,6 +258,4 @@ describe('[9] - describe verifyDecimal', () => {
     it('[9-8] - verifyDecimal return false for an empty array', () => {
         expect(helper.verifyDecimal(varEmptyArray)).toBe(false);
     })
-    
-    
 })
