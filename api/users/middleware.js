@@ -36,11 +36,6 @@ async function isIdInTable(id){
     }
 }
 
-/*
-    filtered object contains a column name and value
-    i.e. {'username':'user1'}
-    i.e. {'product_name':'shoe'}
-*/
 async function isInTable(filtered){
     const array = await model.getBy(filtered);
     if(isEmptyArray(array)){
