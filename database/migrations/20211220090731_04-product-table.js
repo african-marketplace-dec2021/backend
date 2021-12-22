@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
             table.decimal("price").notNull();
             table.integer("category_id").notNull();
             table.string("image_url"); //pending
+            table.string("location"); //pending
             
             table.foreign("category_id").references("id").inTable("categories");
         })
