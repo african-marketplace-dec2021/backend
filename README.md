@@ -43,6 +43,13 @@
     500 | unknown and/or unexpected error occured
     503 | the server is not ready to handle this request
 
+## Endpoint Summary
+
+        Method | Endpoint | Body (required)| Body (optional) | Nodes
+        ---    | --- 
+        POST   | /api/auth/register | username, password, role | N/A | all string inputs. role must be "buyer" or "seller"
+        POST   | /api/auth/login | username, password | N/A | N/A
+
 ## ========== endpoint /api/auth ==========
 
 #### POST /api/auth/register
