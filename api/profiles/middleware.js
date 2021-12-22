@@ -35,7 +35,7 @@ async function verifyNewObject (req, res, next){
     try{
         const {email, first_name, last_name, middle_name, user_id} = req.body;
         if(isUndefined(email) || isUndefined(first_name) || isUndefined(last_name)|| isUndefined(user_id)){
-            res.status(400).json({message:"require email, first_name, last_name, e, user_id"});
+            res.status(400).json({message:"require fields: first_name, last_name, email, user_id. Optional fields : middle_name"});
         }else if(verifyStringAndLength(email, 3, 30) === false){
             res.status(400).json({message:`email must be between 3 and 30 characters long`});
         }else if(verifyStringAndLength(first_name, 3, 30) === false){

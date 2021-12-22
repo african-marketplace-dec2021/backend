@@ -42,4 +42,22 @@ describe("[1] describe endpoint /api/profiles", ()=>{
         const actual = result.body.message;
         expect(actual).toMatch(/invalid id/);
     })
+
+    test("[1-3-1] Happy, POST /api/profiles/, successfully created a new profile", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middle_name":"tommy", "email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        
+        expect(response.body.length).toBe(1);
+        expect(response.body[0]).toHaveProperty("first_name");
+        expect(response.body[0]).toHaveProperty("last_name");
+        expect(response.body[0]).toHaveProperty("email");
+        expect(response.body[0]).toHaveProperty("user_id");
+        expect(response.body[0]).toHaveProperty("id");
+    })
+    test("[1-3-2] Sad, POST /api/profiles/, fail to create a profile due to insufficient input", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middle_name":"tommy", "email":"tommy@mail.com"};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        
+        expect(response.body.message).toMatch(/require fields: first_name, last_name, email, user_id. Optional fields : middle_name/);
+    })
 })
