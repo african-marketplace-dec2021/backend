@@ -45,9 +45,9 @@
 
 ## Endpoint Summary
 
-        Method | Endpoint | Body (required)| Body (optional) | Nodes
-        ---    | --- 
-        POST   | /api/auth/register | username, password, role | N/A | all string inputs. role must be "buyer" or "seller"
+        Method | Endpoint             |         Body (required)  | Body (optional)       | Notes
+        ---    | -------------------- | -------------------------| --------------------- | -----
+        POST   | /api/auth/register   | username, password, role | N/A | all string inputs. role must be "buyer" or "seller"
         POST   | /api/auth/login | username, password | N/A | N/A
 
 ## ========== endpoint /api/auth ==========
