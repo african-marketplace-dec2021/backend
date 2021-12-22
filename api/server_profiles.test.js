@@ -152,13 +152,13 @@ describe("[1] describe endpoint /api/profiles", ()=>{
         expect(response2.body).toHaveProperty("result");
         expect(response2.body.result).toBe(1);
     })
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to delete a non-existing profile", async ()=>{
+    test("[1-5-2] Sad, DELETE /api/profiles/, fail to delete a non-existing profile", async ()=>{
         const response2 = await request(app).delete(`/api/profiles/111`);
 
         expect(response2.body).toHaveProperty("message");
         expect(response2.body.message).toMatch(/not found/);
     })
-    test("[1-4-2] Sad, PUT /api/profiles/, fail to delete due to invalid id", async ()=>{
+    test("[1-5-2] Sad, DELETE /api/profiles/, fail to delete due to invalid id", async ()=>{
         const response2 = await request(app).delete(`/api/profiles/111sss`);
 
         expect(response2.body).toHaveProperty("message");
