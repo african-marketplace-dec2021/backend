@@ -48,19 +48,30 @@
         Method | Endpoint             |         Body (required)  | Body (optional)       | Notes
         ---    | -------------------- | -------------------------| --------------------- | -----
         POST   | /api/auth/register   | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
+        ---    | -------------------- | -------------------------| --------------------- | -----
         POST   | /api/auth/login      | username, password       |         N/A           | N/A
         ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/users           |         N/A              |         N/A           | return all users
+        GET    | /api/users/          |         N/A              |         N/A           | return all users
+        ---    | -------------------- | -------------------------| --------------------- | -----
         GET    | /api/user/:id        |         N/A              |         N/A           | return one user
+        ---    | -------------------- | -------------------------| --------------------- | -----
         POST   | /api/users/          | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
+        ---    | -------------------- | -------------------------| --------------------- | -----
         PUT    | /api/users/:id       |         N/A              |  username, password   | all string inputs
+        ---    | -------------------- | -------------------------| --------------------- | -----
         DELETE | /api/users/:id       |         N/A              |         N/A           |  N/A
         ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/           |         N/A              |         N/A           | 
-        GET    | /api//:id        |         N/A              |         N/A           | 
-        POST   | /api//          |  |         N/A           | 
-        PUT    | /api//:id       |         N/A              |     | 
-        DELETE | /api//:id       |         N/A              |         N/A           |  N/A
+        GET    | /api/profiles/       |         N/A              |         N/A           | 
+        ---    | -------------------- | -------------------------| --------------------- | -----
+        GET    | /api/profiles/:id    |         N/A              |         N/A           | 
+        ---    | -------------------- | -------------------------| --------------------- | -----
+        POST   | /api/profiles/       | first_name, last_name,   |      middle_name      | user_id is positive integer
+               |                      | email ,user_id           | 
+        ---    | -------------------- | -------------------------| --------------------- | -----
+        PUT    | /api/profiles/:id    |         N/A              | firs_name, last_name, |
+               |                      |                          |  middle_name, email   | 
+        ---    | -------------------- | -------------------------| --------------------- | -----
+        DELETE | /api/profiles/:id    |         N/A              |         N/A           |  N/A
         ---    | -------------------- | -------------------------| --------------------- | -----
         GET    | /api/           |         N/A              |         N/A           | 
         GET    | /api//:id        |         N/A              |         N/A           | 
