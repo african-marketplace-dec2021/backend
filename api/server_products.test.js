@@ -77,7 +77,23 @@ describe("[1] describe endpoint /api/products", ()=>{
         expect(response.body.message).toMatch(/not found/);
         
     })
-    test("[1-3-2] Sad, POST /api/products/, fail due to category_id not found", async ()=>{
+    test("[1-4-1] Happy, POST /api/products/, successfully modify a product ", async ()=>{
         
     })
+    test("[1-4-2] Sad, POST /api/products/, fail due to invalid name", async ()=>{
+        
+    })
+    test("[1-4-3] Sad, POST /api/products/, fail due to invalid description", async ()=>{
+        
+    })
+    test("[1-4-4] Sad, POST /api/products/, fail due to invalid price", async ()=>{
+        
+    })
+    test("[1-4-5] Sad, POST /api/products/, fail due to invalid category_id", async ()=>{
+        
+    })
+    test("[1-4-6] Sad, POST /api/products/, fail due to non exsistence category_id", async ()=>{
+        
+    })
+
 })
