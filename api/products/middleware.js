@@ -72,8 +72,17 @@ async function verifyModifiedObject (req, res, next){
             {name:'description', type:'string'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
+        const {name, price, description, category_id} = req.body
         if(Object.keys(req.body.modifiedObject).length === 0){
             res.status(400).json({message:"no valid column name detected"});
+        }else if(!isUndefined(name) && verifyStringAndLength(name, 3, 30) === false){
+            res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
+        }else if(!isUndefined(description) && verifyStringAndLength(description, 3, 1000) === false){
+            res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
+        }else if(!isUndefined(price) && verifyDecimal(price) === false){
+            res.status(400).json({message:"price must be a number"});
+        }else if(!isUndefined(category_id) && verifyInterger(category_id) === false){
+            res.status(400).json({message:"category_id must be a number"});
         }else{
             next();
         }
