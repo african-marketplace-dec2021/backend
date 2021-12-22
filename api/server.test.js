@@ -5,12 +5,12 @@ const db = require("../database/db-config");
 console.log("NODE_ENV = ", process.env.NODE_ENV);
 
 beforeAll(async ()=>{
-    await db.migrate.rollback();
-    await db.migrate.latest();
-})
-beforeEach(async ()=>{
     // await db.migrate.rollback();
     // await db.migrate.latest();
+})
+beforeEach(async ()=>{
+    await db.migrate.rollback();
+    await db.migrate.latest();
     await db.seed.run();
 })
 
@@ -127,5 +127,28 @@ describe("[1] describe endpoint /api/users", ()=>{
         expect(response.body.length).toEqual(1);
         expect(response.body[0]).toHaveProperty("id");
         expect(response2.body.message).toMatch(/username happy is not available/);;      
+    })
+    test("[1-5-1] Happy, DELETE /api/users/, successfully delete a user", async ()=>{ 
+        const newUser = { username: "jamjam", password:"jamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).delete(`/api/users/${response.body[0].id}`);
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.result).toEqual(1);      
+    })
+    test("[1-5-2] Sad, DELETE /api/users/, cannt delete a user due to invalid user id", async ()=>{ 
+        const newUser = { username: "jamjam", password:"jamjam", role:"buyer"};
+        const response = await request(app).post("/api/users/").send(newUser);
+        const response2 = await request(app).delete(`/api/users/ss`);
+        const response3 = await request(app).delete(`/api/users/3s`);
+        
+        
+        expect(response.body.length).toEqual(1);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/invalid/);
+        expect(response3.body).toHaveProperty("message");
+        expect(response3.body.message).toMatch(/invalid id/);
     })
 })

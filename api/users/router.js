@@ -49,7 +49,7 @@ router.put("/:id", verifyExistingId, verifyModifiedObject, verifyUniqueUsername,
     }
 })
 
-router.delete("/:id", async (req, res, next) =>{
+router.delete("/:id", verifyExistingId, async (req, res, next) =>{
     try{
         const result = await model.remove(req.params.id);
         res.status(201).json({result});

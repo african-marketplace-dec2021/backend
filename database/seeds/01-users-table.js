@@ -1,6 +1,9 @@
+const { del } = require("express/lib/application");
+
 exports.seed = function(knex) {
   return knex('users')
     // .truncate()
+    // .del()
     .then(function () {
       return knex('users').insert([
         {username:"admin", password:"admin", role:"admin"},
