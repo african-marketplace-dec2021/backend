@@ -44,9 +44,16 @@
     503 | the server is not ready to handle this request
 
 ## Endpoint Summary
+        <table>
+                <tr> 
+                        <td>Food</td>
+                </tr>
+        </table>
+
+## Endpoint Summary
 
         Method | Endpoint             |         Body (required)  | Body (optional)       | Notes
-        ---    | -------------------- | -------------------------| --------------------- | -----
+        |:---    |: -------------------- |: -------------------------|: --------------------- |: -----|
         POST   | /api/auth/register   | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
         ---    | -------------------- | -------------------------| --------------------- | -----
         POST   | /api/auth/login      | username, password       |         N/A           | N/A
