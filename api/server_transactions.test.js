@@ -82,8 +82,69 @@ describe("[1] describe endpoint /api/transactions", ()=>{
         expect(response.body.message).toMatch(/product_id 400 not found/);
     })
     
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-4-1] Happy, PUT /api/transactions/, successfully modify a transaction", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions/").send(newTransaction);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/transactions/${id}`).send(newTransaction);
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body).toHaveProperty("result");
+    })
+    test("[1-4-2] Sad, PUT /api/transactions/, fail to modify a transaction due to no inputs", async ()=>{
+        const response2 = await request(app).put(`/api/transactions/5`).send({});
+        expect(response2.body.message).toMatch(/no valid column/);
+    })
+    test("[1-4-3] Sad, PUT /api/transactions/, fail to modify a transaction due to invalid order_id", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/transactions/${id}`).send({"order_id":"10"});
+        const response3 = await request(app).put(`/api/transactions/${id}`).send({"order_id":-10});
+        expect(response2.body.message).toMatch(/order_id must/);
+        expect(response3.body.message).toMatch(/order_id must/);
+    })
+    test("[1-4-4] Sad, PUT /api/transactions/, fail to modify a transaction due to invalid product_id", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/transactions/${id}`).send({"product_id":"10"});
+        const response3 = await request(app).put(`/api/transactions/${id}`).send({"product_id":-10});
+        expect(response2.body.message).toMatch(/product_id must/);
+        expect(response3.body.message).toMatch(/product_id must/);
+    })
+    test("[1-4-5] Sad, PUT /api/transactions/, fail to modify a transaction due to invalid quantity", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/transactions/${id}`).send({"quantity":"10"});
+        const response3 = await request(app).put(`/api/transactions/${id}`).send({"quantity":-10});
+        expect(response2.body.message).toMatch(/quantity must/);
+        expect(response3.body.message).toMatch(/quantity must/);
+    })
+    test("[1-4-6] Sad, PUT /api/transactions/, fail to modify a transaction due to non existence order_id", async ()=>{
+        const response2 = await request(app).put(`/api/transactions/1`).send({"order_id":100});
+        expect(response2.body.message).toMatch(/order_id 100 not found/);
+    })
+    test("[1-4-7] Sad, PUT /api/transactions/, fail to modify a transaction due to non existence product_id", async ()=>{
+        const response2 = await request(app).put(`/api/transactions/1`).send({"product_id":100});
+        expect(response2.body.message).toMatch(/product_id 100 not found/);
     })
 
+    test("[1-5-1] Happy, DELETE /api/transactions/, successfully delete a transaction", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/transactions/${id}`);
+        expect(response2.body.result).toBe(1);
+    })
+    test("[1-5-2] Sad, PUT /api/transactions/, fail to delete a transaction due to invalid id", async ()=>{
+        const response = await request(app).delete(`/api/transactions/100zz`);
+        const response2 = await request(app).delete(`/api/transactions/-100`);
+        expect(response.body.message).toMatch(/id must be/);
+        expect(response2.body.message).toMatch(/id must be/);
+    })
+    test("[1-5-3] Sad, PUT /api/transactions/, fail to delete a transaction due to non-existence id", async ()=>{
+        const response = await request(app).delete(`/api/transactions/100`);
+        expect(response.body.message).toMatch(/id 100 not found/);
+    })
 })

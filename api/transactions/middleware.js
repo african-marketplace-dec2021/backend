@@ -9,7 +9,7 @@ async function verifyExistingId (req, res, next){
         if (isUndefined(id)){
             res.status(400).json({message:"require id"});
         }else if (verifyInterger(Number(id)) === false){
-            res.status(400).json({message:`invalid id ${id}`});
+            res.status(400).json({message:`invalid id ${id}, id must be positive integer`});
         }else{
             const boolean = await isIdInTable(id);
             if (boolean === false){
@@ -56,7 +56,7 @@ async function verifyProductId(req, res, next){
     if ( isUndefined(product_id)){
         next();
     }else if (verifyInterger(product_id) === false){
-        res.status(400).json({message:`invalid product_id ${product_id}, must be non negative integer`})
+        res.status(400).json({message:`invalid product_id ${product_id}, product_id must be non negative integer`})
     }else{
         const boolean = await middlewareProducts.isIdInTable(product_id);
         if ( boolean === false){
@@ -72,7 +72,7 @@ async function verifyOrderId(req, res, next){
     if ( isUndefined(order_id)){
         next();
     }else if (verifyInterger(order_id) === false){
-        res.status(400).json({message:`invalid order_id ${order_id}, must be non negative integer`})
+        res.status(400).json({message:`invalid order_id ${order_id}, order_id must be non negative integer`})
     }else{
         const boolean = await middlewareOrders.isIdInTable(order_id);
         if ( boolean === false){
@@ -86,7 +86,7 @@ async function verifyOrderId(req, res, next){
 async function verifyPositiveQuantity(req, res, next){
     const {quantity} = req.body;
     if (verifyInterger(quantity) === false){
-        res.status(400).json({message:`invalid quantity ${quantity}, must be non negative integer`})
+        res.status(400).json({message:`invalid quantity ${quantity}, quantity must be non negative integer`})
     }else{
         next();
     }
@@ -99,8 +99,15 @@ async function verifyModifiedObject (req, res, next){
             {name:'product_id', type:'number'},
             {name:'quantity', type:'number'}
         ];
+        const {product_id, order_id, quantity} = req.body;
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        if(Object.keys(req.body.modifiedObject).length === 0){
+        if (!isUndefined(product_id) && verifyInterger(product_id) === false){
+            res.status(400).json({message:`invalid product_id ${product_id}, product_id must be non negative integer`})
+        }else if (!isUndefined(order_id) && verifyInterger(order_id) === false){
+            res.status(400).json({message:`invalid order_id ${order_id}, order_id must be non negative integer`})
+        }else if (!isUndefined(quantity) && verifyInterger(quantity) === false){
+            res.status(400).json({message:`invalid quantity ${quantity}, quantity must be non negative integer`})
+        }else if(Object.keys(req.body.modifiedObject).length === 0){
             res.status(400).json({message:"no valid column name detected"});
         }else{
             next();
