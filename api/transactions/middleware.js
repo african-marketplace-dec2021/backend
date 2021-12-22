@@ -36,13 +36,13 @@ async function verifyNewObject (req, res, next){
     try{
         const {product_id, order_id, quantity} = req.body;
         if (isUndefined(product_id) || isUndefined(order_id) || isUndefined(quantity)){
-            res.status(400).json({message:"require product_id, order_id and quantity"})
+            res.status(400).json({message:"require fields : product_id, order_id and quantity"})
         }else if (verifyInterger(product_id) === false){
-            res.status(400).json({message:`invalid product_id ${product_id}, must be non negative integer`})
+            res.status(400).json({message:`invalid product_id ${product_id}, product_id must be non negative integer`})
         }else if (verifyInterger(order_id) === false){
-            res.status(400).json({message:`invalid order_id ${order_id}, must be non negative integer`})
+            res.status(400).json({message:`invalid order_id ${order_id}, order_id must be non negative integer`})
         }else if (verifyInterger(quantity) === false){
-            res.status(400).json({message:`invalid quantity ${quantity}, must be non negative integer`})
+            res.status(400).json({message:`invalid quantity ${quantity}, quantity must be non negative integer`})
         }else{
             next();
         }

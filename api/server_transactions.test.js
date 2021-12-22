@@ -42,24 +42,46 @@ describe("[1] describe endpoint /api/transactions", ()=>{
         expect(response.body[0]).toHaveProperty("product_id");
         expect(response.body[0]).toHaveProperty("quantity");
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-2] Sad, POST /api/transactions/, fail to create a transaction due to insufficient inputs", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":4};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        expect(response.body.message).toMatch(/require fields : /);
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-3] Sad, POST /api/transactions/, fail to create a transaction due to invalid order_id", async ()=>{
+        const newTransaction = {"order_id":"1", "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const newTransaction2 = {"order_id":"1", "product_id":4, "quantity":10};
+        const response2 = await request(app).post("/api/transactions").send(newTransaction2);
+        expect(response.body.message).toMatch(/order_id must/);
+        expect(response2.body.message).toMatch(/order_id must/);
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-4] Sad, POST /api/transactions/, fail to create a transaction due to invalid product_id", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":"4", "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const newTransaction2 = {"order_id":1, "product_id":"4", "quantity":10};
+        const response2 = await request(app).post("/api/transactions").send(newTransaction2);
+        expect(response.body.message).toMatch(/product_id must/);
+        expect(response2.body.message).toMatch(/product_id must/);
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-5] Sad, POST /api/transactions/, fail to create a transaction due to invalid quantity", async ()=>{   
+        const newTransaction = {"order_id":1, "product_id":4, "quantity":"10"};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        const newTransaction2 = {"order_id":1, "product_id":4, "quantity":-10};
+        const response2 = await request(app).post("/api/transactions").send(newTransaction2);
+        expect(response.body.message).toMatch(/quantity must/);
+        expect(response2.body.message).toMatch(/quantity must/);
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-6] Sad, POST /api/transactions/, fail to create a transaction due to non-existence order_id", async ()=>{
+        const newTransaction = {"order_id":100, "product_id":4, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        expect(response.body.message).toMatch(/order_id 100 not found/);
     })
-    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
-
+    test("[1-3-7] Sad, POST /api/transactions/, fail to create a transaction due to non-existence product_id", async ()=>{
+        const newTransaction = {"order_id":1, "product_id":400, "quantity":10};
+        const response = await request(app).post("/api/transactions").send(newTransaction);
+        expect(response.body.message).toMatch(/product_id 400 not found/);
     })
+    
     test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
 
     })
