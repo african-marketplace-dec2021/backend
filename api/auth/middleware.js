@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { isEmptyArray } = require("../helper");
-const middlewareUsers = require("../users/middleware");
 const modelUsers = require("../users/model");
-const {SECRET} = require("../../env");
 
 async function authenticateUsernamePassword ( req, res, next){
     try{
