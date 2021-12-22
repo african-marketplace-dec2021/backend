@@ -238,14 +238,14 @@ describe('[8] - describe verifyStringAndLength', () => {
 })
 
 describe('[9] - describe verifyDecimal', () => {
-    it('[9-1] - verifyDecimal return false for an integer ', () => {
-        expect(helper.verifyDecimal(varInteger)).toBe(true);
-    })
-    it('[9-2] - verifyDecimal return true for number', () => {
-        expect(helper.verifyDecimal(varNumber)).toBe(true);
-    })
-    it('[9-3] - verifyDecimal return true for an decimal', () => {
+    it('[9-1] - verifyDecimal return true for an decimal', () => {
         expect(helper.verifyDecimal(varDecimal)).toBe(true);
+    })
+    it('[9-2] - verifyDecimal return false for an integer ', () => {
+        expect(helper.verifyDecimal(varInteger)).toBe(false);
+    })
+    it('[9-3] - verifyDecimal return false for number', () => {
+        expect(helper.verifyDecimal(varNumber)).toBe(false);
     })
     it('[9-4] - verifyDecimal return false for an undefined object ', () => {
         expect(helper.verifyDecimal(varUndefined)).toBe(false);
