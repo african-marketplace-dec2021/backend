@@ -87,4 +87,40 @@ describe("[1] describe endpoint /api/orders", ()=>{
         const response2 = await request(app).delete(`/api/orders/1000`);
         expect(response2.body.message).toMatch(/id 1000 not found/);
     })
+    test("[1-4-1] Happy, PUT /api/orders/, successfully modify an order", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/orders/${id}`).send({"seller_user_id":2,"buyer_user_id":1});
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body).toHaveProperty("result");
+    })
+    test("[1-4-2] Sad, PUT /api/orders/, fail due to insufficient inputs", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/orders/${id}`).send();
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/require fields :/);
+    })
+    test("[1-4-2] Sad, PUT /api/orders/, fail due to insufficient inputs", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/orders/${id}`).send({"seller_user_id":2,"buyer_user_id":2});
+        expect(response.body[0]).toHaveProperty("id");
+        expect(response2.body.message).toMatch(/cannot equal to/);
+    })
+    test("[1-4-3] Sad, PUT /api/orders/, fail due to invalid seller_user_id or buyer_user_id", async ()=>{
+        const response = await request(app).put(`/api/orders/1`).send({"seller_user_id":"1","buyer_user_id":2});
+        const response2 = await request(app).put(`/api/orders/1`).send({"seller_user_id":1,"buyer_user_id":"2"});
+        expect(response.body.message).toMatch(/seller_user_id must/);
+        expect(response2.body.message).toMatch(/buyer_user_id must/);
+    })
+    test("[1-4-4] Sad, PUT /api/orders/, fail due to non-existence seller_user_id or buyer_user_id", async ()=>{
+        const response = await request(app).put(`/api/orders/1`).send({"seller_user_id":100,"buyer_user_id":2});
+        const response2 = await request(app).put(`/api/orders/1`).send({"seller_user_id":1,"buyer_user_id":200});
+        expect(response.body.message).toMatch(/seller_user_id 100 not found/);
+        expect(response2.body.message).toMatch(/buyer_user_id 200 not found/);
+    })
 })

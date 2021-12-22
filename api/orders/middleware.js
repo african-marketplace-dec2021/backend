@@ -94,7 +94,16 @@ async function verifyModifiedObject (req, res, next){
             {name:'seller_user_id', type:'number'}
         ];
         req.body.modifiedObject = processBodyToObject(keys, req.body);
-        if(Object.keys(req.body.modifiedObject).length === 0){
+        const {buyer_user_id, seller_user_id} = req.body;
+        if (isUndefined(buyer_user_id) || isUndefined(seller_user_id)){
+            res.status(400).json({message:"require fields : buyer_user_id and seller_user_id"});
+        }else if(verifyInterger(buyer_user_id) === false){
+            res.status(400).json({message:"buyer_user_id must be positive integer"});
+        }else if (verifyInterger(seller_user_id) === false){
+            res.status(400).json({message:"seller_user_id must be positive integer"});
+        }else if (seller_user_id === buyer_user_id){
+            res.status(400).json({message:"seller_user_id cannot equal to buyer_user_id"});
+        }else if(Object.keys(req.body.modifiedObject).length === 0){
             res.status(400).json({message:"no valid column name detected"});
         }else{
             next();

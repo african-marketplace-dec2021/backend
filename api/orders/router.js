@@ -32,17 +32,14 @@ router.post("/", verifyNewObject, verifyBuyerUserId, verifySellerUserId, async (
     
 })
 
-//--------------------pending delete----------------------------------
-// ????????????? cannot justify when will this code be needed ???????
-// router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller, async (req, res, next)=>{
-//     try{
-//         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
-//         res.status(201).json({result});
-//     }catch(err){
-//         next(err);
-//     }
-// })
-//--------------------pending delete----------------------------------
+router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller, async (req, res, next)=>{
+    try{
+        const result = await model.modify(req.params.id, {...req.body.modifiedObject})
+        res.status(201).json({result});
+    }catch(err){
+        next(err);
+    }
+})
 
 router.delete("/:id", verifyExistingId, async (req, res, next) =>{
     try{
