@@ -30,7 +30,7 @@ router.post("/", verifyNewObject, verifyUniqueUsername, async (req, res, next) =
         const {username, password, role} = req.body;
         const result = await model.add({
             username, 
-            password:bcrypt.hashSync(password, process.env.BCRYPT_ROUND || BCRYPT_ROUND),
+            password:bcrypt.hashSync(password, Number(process.env.BCRYPT_ROUND)),
             role
         });
         res.status(201).json(result);
