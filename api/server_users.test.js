@@ -5,12 +5,10 @@ const db = require("../database/db-config");
 console.log("NODE_ENV = ", process.env.NODE_ENV);
 
 beforeAll(async ()=>{
-    // await db.migrate.rollback();
-    // await db.migrate.latest();
-})
-beforeEach(async ()=>{
     await db.migrate.rollback();
     await db.migrate.latest();
+})
+beforeEach(async ()=>{
     await db.seed.run();
 })
 
@@ -23,7 +21,6 @@ describe("sanity", ()=>{
 describe("[1] describe endpoint /api/users", ()=>{
     test("[1-1-1] Happy, GET /api/users/ successfully", async ()=>{
         const result = await request(app).get("/api/users/");
-
         expect(result.body.length).toBe(4);
     })
     test("[1-2-1] Happy, GET /api/users/1 successfully", async ()=>{
