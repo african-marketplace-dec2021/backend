@@ -38,7 +38,7 @@ async function buildToken(req, res, next) {
 function verifyToken(req) {
     try {
         const { authorization } = req.headers;
-        const decodedToken = jwt.verify(authorization, process.env.SECRET || SECRET);
+        const decodedToken = jwt.verify(authorization, process.env.SECRET);
         req.decodedToken = decodedToken;
         return true;
     } catch (err) {
