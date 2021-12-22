@@ -72,4 +72,19 @@ describe("[1] describe endpoint /api/orders", ()=>{
         const response = await request(app).post("/api/orders/").send(newOrder);
         expect(response.body.message).toMatch(/seller_user_id cannot equal to buyer_user_id/);
     })
+    test("[1-5-1] Happy, DELETE /api/orders/, successfully delete an order", async ()=>{
+        const newOrder = {"seller_user_id":1, "buyer_user_id":2 };
+        const response = await request(app).post("/api/orders/").send(newOrder);
+        const id = response.body[0].id;
+        const response2 = await request(app).delete(`/api/orders/${id}`);
+        expect(response2.body.result).toBe(1);
+    });
+    test("[1-5-2] Sad, DELETE /api/products/, fail due to invalid id", async ()=>{
+        const response2 = await request(app).delete(`/api/orders/100zz`);
+        expect(response2.body.message).toMatch(/invalid id/);
+    })
+    test("[1-5-3] Sad, DELETE /api/products/, fail due to non-existing id", async ()=>{
+        const response2 = await request(app).delete(`/api/orders/1000`);
+        expect(response2.body.message).toMatch(/id 1000 not found/);
+    })
 })
