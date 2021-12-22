@@ -27,7 +27,7 @@ async function buildToken(req, res, next) {
             username: req.body.authenticatedUser.username,
             role: req.body.authenticatedUser.role,
         },
-        process.env.SECRET || SECRET,
+        process.env.SECRET,
         {
             expiresIn: "1d",
         }
