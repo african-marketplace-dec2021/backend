@@ -47,14 +47,14 @@
 
         Method | Endpoint             |         Body (required)  | Body (optional)       | Notes
         ---    | -------------------- | -------------------------| --------------------- | -----
-        POST   | /api/auth/register   | username, password, role | N/A                   | all string inputs. role must be "buyer" or "seller"
-        POST   | /api/auth/login      | username, password       | N/A                   | N/A
+        POST   | /api/auth/register   | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
+        POST   | /api/auth/login      | username, password       |         N/A           | N/A
         ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | | | |
-        GET    | | | |
-        POST   | | | |
-        PUT    | | | |
-        DELETE | | | |
+        GET    | /api/users           |         N/A              |         N/A           | return all users
+        GET    | /api/user/:id        |         N/A              |         N/A           | return one user
+        POST   | /api/users/          | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
+        PUT    | /api/users/:id       |         N/A              |  username, password   | all string inputs
+        DELETE | /api/users/:id       |         N/A              |         N/A           |  N/A
         ---    | -------------------- | -------------------------| --------------------- | -----
         GET    | | | |
         GET    | | | |
