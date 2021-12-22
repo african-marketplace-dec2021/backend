@@ -37,5 +37,26 @@ describe("[1] describe endpoint /api/transactions", ()=>{
     test("[1-3-1] Happy, POST /api/transactions/, successfully created a new profile with middle_name", async ()=>{
 
     })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
+    test("[1-3-] Sad, POST /api/transactions/, fail to create a transaction due to ", async ()=>{
+
+    })
 
 })
