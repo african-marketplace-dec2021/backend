@@ -240,8 +240,8 @@ describe('[9] - describe verifyDecimal', () => {
     it('[9-2] - verifyDecimal return false for an integer ', () => {
         expect(helper.verifyDecimal(varInteger)).toBe(false);
     })
-    it('[9-3] - verifyDecimal return false for number', () => {
-        expect(helper.verifyDecimal(varNumber)).toBe(false);
+    it('[9-3] - verifyDecimal return false for object', () => {
+        expect(helper.verifyDecimal(varObj)).toBe(false);
     })
     it('[9-4] - verifyDecimal return false for an undefined object ', () => {
         expect(helper.verifyDecimal(varUndefined)).toBe(false);
@@ -258,8 +258,6 @@ describe('[9] - describe verifyDecimal', () => {
     it('[9-8] - verifyDecimal return false for an empty array', () => {
         expect(helper.verifyDecimal(varEmptyArray)).toBe(false);
     })
-    it('[9-9] - verifyDecimal return false for object', () => {
-        expect(helper.verifyDecimal(varObj)).toBe(false);
-    })
+    
     
 })
