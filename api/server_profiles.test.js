@@ -94,10 +94,49 @@ describe("[1] describe endpoint /api/profiles", ()=>{
         
         expect(response.body.message).toMatch(/middle_name must be/);
     })
-    test("[1-3-8] Sad, POST /api/profiles/, fail to create a profile due to ", async ()=>{
+    test("[1-4-1] Happy, PUT /api/profiles/, successfully modify a profile", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middlename":"tomtom","email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/profiles/${id}`).send({"first_name":"tom"});
+        const response3 = await request(app).put(`/api/profiles/${id}`).send({"last_name":"tom"});
+        const response4 = await request(app).put(`/api/profiles/${id}`).send({"middle_name":"tom"});
+        const response5 = await request(app).put(`/api/profiles/${id}`).send({"email":"tom@mail.com"});
+        const response6 = await request(app).put(`/api/profiles/${id}`).send({"user_id":2});
+        
+        expect(response.body.length).toBe(1);
+        expect(response2.body.result).toBe(1);
+        expect(response3.body.result).toBe(1);
+        expect(response4.body.result).toBe(1);
+        expect(response5.body.result).toBe(1);
+        expect(response6.body).toHaveProperty("message");
+        expect(response6.body.message).toMatch(/no valid/);
 
     })
-    test("[1-3-9] Sad, POST /api/profiles/, fail to create a profile due to ", async ()=>{
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect first name", async ()=>{
+        const newProfile = {"first_name":"tommy", "last_name":"tommy", "middlename":"tomtom","email":"tommy@mail.com", "user_id":1};
+        const response = await request(app).post("/api/profiles/").send(newProfile);
+        const id = response.body[0].id;
+        const response2 = await request(app).put(`/api/profiles/${id}`).send({"first_name":""});
+
+        expect(response2.body).toHaveProperty("message");
+    })
+
+    test("[1-4-3] Sad, PUT /api/profiles/, fail to create a profile due to incorrect last name", async ()=>{
+
+    })
+
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect middle name", async ()=>{
+
+    })
+
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect first name", async ()=>{
+
+    })
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due to incorrect email", async ()=>{
+
+    })
+    test("[1-4-2] Sad, PUT /api/profiles/, fail to create a profile due user_id not found", async ()=>{
 
     })
 })
