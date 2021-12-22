@@ -78,7 +78,7 @@ async function verifyModifiedObject (req, res, next){
         }else if(!isUndefined(description) && verifyStringAndLength(description, 3, 1000) === false){
             res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
         }else if(!isUndefined(price) && verifyDecimal(price) === false){
-            res.status(400).json({message:"price must be a number"});
+            res.status(400).json({message:"price must be a positive number"});
         }else if(!isUndefined(category_id) && verifyInterger(category_id) === false){
             res.status(400).json({message:"category_id must be a number"});
         }else if(Object.keys(req.body.modifiedObject).length === 0){
