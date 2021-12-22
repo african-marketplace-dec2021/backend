@@ -32,6 +32,21 @@ async function isIdInTable(id){
     }
 }
 
+async function verifyUserId(req, res, next){
+    try{
+        const {user_id} = req.body;
+        const boolean = await middlewareUsers.isIdInTable(user_id);
+        if(boolean === false){
+            res.status(404).json({message:`user_id ${user_id} not found`})
+        }else{
+            next();
+        }
+    }catch(err){
+        next(err);
+    }
+
+}
+
 async function verifyNewObject (req, res, next){
     try{
         const {email, first_name, last_name, middle_name, user_id} = req.body;
@@ -56,20 +71,6 @@ async function verifyNewObject (req, res, next){
     }
 }
 
-async function verifyUserId(req, res, next){
-    try{
-        const {user_id} = req.body;
-        const boolean = await middlewareUsers.isIdInTable(user_id);
-        if(boolean === false){
-            res.status(404).json({message:`user_id ${user_id} not found`})
-        }else{
-            next();
-        }
-    }catch(err){
-        next(err);
-    }
-
-}
 
 async function verifyModifiedObject (req, res, next){
     try{
