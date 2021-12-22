@@ -5,14 +5,11 @@ const router =  express();
 const modelUsers = require("../users/model");
 const {verifyUsernamePassword, verifyUniqueUsername,verifyNewObject:verifyNewUser} = require("../users/middleware");
 const {authenticateUsernamePassword, buildToken} = require("./middleware");
-const {BCRYPT_ROUND} = require("../../env");
 
 router.post("/register", verifyNewUser, verifyUniqueUsername, async (req, res, next) => {
     try{
         const {username, password, role} = req.body;
         const hashsedPassword = bcrypt.hashSync(password, Number(process.env.BCRYPT_ROUND));
-
-        
         const result = await modelUsers.add({username, password: hashsedPassword, role});
         res.status(201).json(result);
     }catch(err){
