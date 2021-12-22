@@ -32,14 +32,14 @@ router.post("/", verifyNewObject, verifyBuyerUserId, verifySellerUserId, async (
     
 })
 
-router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller, async (req, res, next)=>{
-    try{
-        const result = await model.modify(req.params.id, {...req.body.modifiedObject})
-        res.status(201).json({result});
-    }catch(err){
-        next(err);
-    }
-})
+// router.put("/:id", verifyExistingId, verifyModifiedObject, verifyBuyerUserId, verifySellerUserId, verifyNotEqualBuyerSeller, async (req, res, next)=>{
+//     try{
+//         const result = await model.modify(req.params.id, {...req.body.modifiedObject})
+//         res.status(201).json({result});
+//     }catch(err){
+//         next(err);
+//     }
+// })
 
 router.delete("/:id", verifyExistingId, async (req, res, next) =>{
     try{
