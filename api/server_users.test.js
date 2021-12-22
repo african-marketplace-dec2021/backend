@@ -2,8 +2,6 @@ const app = require("./server");
 const request = require("supertest");
 const db = require("../database/db-config");
 
-console.log("NODE_ENV = ", process.env.NODE_ENV);
-
 beforeAll(async ()=>{
     await db.migrate.rollback();
     await db.migrate.latest();
