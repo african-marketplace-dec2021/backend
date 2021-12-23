@@ -44,11 +44,36 @@
     503 | the server is not ready to handle this request
 
 ## Endpoint Summary
-        <table>
-                <tr> 
-                        <td>Food</td>
+
+<table border="1" cellpadding="4" cellspacing="0">
+        <thead>
+                <tr>
+                        <th align="center">Method</th>
+                        <th align="center">Endpoint</th>
+                        <th align="center">Body (require)</th>
+                        <th align="center">Body (optional)</th>
+                        <th align="center">Notes</th>
                 </tr>
-        </table>
+        </thead>
+        <tbody>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api/auth/register</td>
+                        <td align="center">username, password</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                </tr>
+                <tr valign="top">
+                        <td>Everywhere</td><td align="right">2</td>
+                </tr>
+        </tbody>
+        <tfoot>
+                <tr valign="top">
+                        <td align="right">Sum:</td>
+                        <td align="right">1,234,569</td>
+                </tr>
+        </tfoot>
+</table>
 
 ## Endpoint Summary
 
