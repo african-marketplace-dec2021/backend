@@ -53,6 +53,17 @@ describe("[1] describe endpoint /api/products", ()=>{
             expect(response.body[0]).toHaveProperty("category_id");
             expect(response.body[0]).toHaveProperty("id");
         })
+        test("[1-3-12] Happy, POST /api/products/, successfully created a new profile with middle_name", async ()=>{
+            const newProduct = {"name":"product 1", "description":"no description", "category_id":1, "price":11};
+            const response = await request(app).post("/api/products/").send(newProduct);
+            
+            expect(response.body.length).toBe(1);
+            expect(response.body[0]).toHaveProperty("name");
+            expect(response.body[0]).toHaveProperty("description");
+            expect(response.body[0]).toHaveProperty("price");
+            expect(response.body[0]).toHaveProperty("category_id");
+            expect(response.body[0]).toHaveProperty("id");
+        })
         test("[1-3-2] Sad, POST /api/products/, fail due to insufficient inputs", async ()=>{
             const newProduct = {"nam":"product 2", "descriptionn":"no description", "category_id":1, "price":10.99};
             const response = await request(app).post("/api/products/").send(newProduct);
@@ -175,4 +186,5 @@ describe("[1] describe endpoint /api/products", ()=>{
             expect(response2.body.message).toMatch(/id 611 not found/)
         })
     })
+
 })
