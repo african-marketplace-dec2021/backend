@@ -73,6 +73,114 @@
                 <tr><td></td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
+                        <td align="center">/api/users/</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/users/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api/users/</td>
+                        <td align="center">username, password, role</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string </br> * role must be "buyer" or "seller"</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api/users/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">username or password</td>
+                        <td align="left">* all inputs are string </br> * role must be "buyer" or "seller"</
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api/users/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/profiles/</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/profiles/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api/profiles/</td>
+                        <td align="center">first_name, last_name, email, user_id</td>
+                        <td align="center">middle_name</td>
+                        <td align="left">* all inputs are string, except user_id</br>* user_id is integer</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api/profiles/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">first_name, middle_name, last_name, email</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api/profiles/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/categories/</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/categories/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api/categories/</td>
+                        <td align="center">name, description</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api/categories/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api/categories/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
                         <td align="center">/api//</td>
                         <td align="center">N/A</td>
                         <td align="center">N/A</td>
