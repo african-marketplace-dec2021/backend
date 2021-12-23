@@ -61,7 +61,7 @@
                         <td align="center">/api/auth/register</td>
                         <td align="center">username, password</td>
                         <td align="center">N/A</td>
-                        <td align="center">N/A</td>
+                        <td align="left">*all inputs are string </br>*role is "buyer" or "seller"</td>
                 </tr>
                 <tr valign="top">
                         <td>Everywhere</td><td align="right">2</td>
