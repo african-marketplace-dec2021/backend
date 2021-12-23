@@ -11,6 +11,13 @@ function verifyInterger(input){
     return Number.isInteger(input) && regex.test(input) === false && input > 0;
 }
 
+/**
+ * verify an integer , return true
+ * verify a decimal, return true
+ * return false on any other type
+ * @param {*} input 
+ * @returns 
+ */
 function verifyDecimal(input){
     let regex = /^[-+]?[0-9]+\.[0-9]+$/;
     if(typeof input === 'string'){
