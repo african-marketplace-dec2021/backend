@@ -1,6 +1,6 @@
 const model = require("./model");
 const middlewareCategories = require("../categories/middleware");
-const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength, verifyDecimal, verifyString, verifyInteger} = require("../helper");
+const {isEmptyArray, isUndefined, verifyInterger, processBodyToObject, verifyStringAndLength, verifyDecimal: verifyNumber, verifyString, verifyInteger} = require("../helper");
 
 async function verifyExistingId (req, res, next){
     try{
@@ -40,7 +40,7 @@ async function verifyNewObject (req, res, next){
             res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
         }else if(verifyStringAndLength(description, 3, 1000) === false){
             res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
-        }else if(verifyDecimal(price) === false){
+        }else if(verifyNumber(price) === false){
             res.status(400).json({message:"price must be a number"});
         }else if(verifyInterger(category_id) === false){
             res.status(400).json({message:"category_id must be a number"});
@@ -80,7 +80,7 @@ async function verifyModifiedObject (req, res, next){
             res.status(400).json({message:"name must be string, between 3 to 30 characters long"});
         }else if(!isUndefined(description) && verifyStringAndLength(description, 3, 1000) === false){
             res.status(400).json({message:"description must be string beteen3 and 1000 characters long"});
-        }else if(!isUndefined(price) && verifyDecimal(price) === false){
+        }else if(!isUndefined(price) && verifyNumber(price) === false){
             res.status(400).json({message:"price must be a positive number"});
         }else if(!isUndefined(category_id) && verifyInterger(category_id) === false){
             res.status(400).json({message:"category_id must be a number"});
