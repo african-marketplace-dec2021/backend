@@ -13,7 +13,12 @@ function verifyInterger(input){
 
 function verifyDecimal(input){
     let regex = /^[-+]?[0-9]+\.[0-9]+$/;
-    return typeof input !== 'string' && Number.isInteger(input) === false && regex.test(input)
+    if(typeof input === 'string'){
+        return false
+    }else{
+        return  Number.isInteger(input) || regex.test(input) || typeof input === 'Number';
+    }
+    
 }
 
 function isEmptyString(input) {

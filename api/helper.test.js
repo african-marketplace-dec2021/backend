@@ -238,7 +238,7 @@ describe('[9] - describe verifyDecimal', () => {
         expect(helper.verifyDecimal(varDecimal)).toBe(true);
     })
     it('[9-2] - verifyDecimal return false for an integer ', () => {
-        expect(helper.verifyDecimal(varInteger)).toBe(false);
+        expect(helper.verifyDecimal(varInteger)).toBe(true);
     })
     it('[9-3] - verifyDecimal return false for object', () => {
         expect(helper.verifyDecimal(varObj)).toBe(false);
