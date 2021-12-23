@@ -56,6 +56,7 @@
                 </tr>
         </thead>
         <tbody>
+                <tr align="center"><td colspan="5">/api/auth</td></tr>
                 <tr valign="top">
                         <td align="center">POST</td>
                         <td align="center">/api/auth/register</td>
@@ -70,7 +71,7 @@
                         <td align="center">N/A</td>
                         <td align="left">* all inputs are string </br>* role is "buyer" or "seller"</td>
                 </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/users</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api/users/</td>
@@ -106,7 +107,7 @@
                         <td align="center">N/A</td>
                         <td align="left"></td>
                 </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/profiles</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api/profiles/</td>
@@ -142,7 +143,7 @@
                         <td align="center">N/A</td>
                         <td align="left"></td>
                 </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/categories</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api/categories/</td>
@@ -178,7 +179,43 @@
                         <td align="center">N/A</td>
                         <td align="left">* all inputs are string</td>
                 </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/products</td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/products/</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api/products/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api/products/</td>
+                        <td align="center">name, description, price, category_id</td>
+                        <td align="center">location, image_url</td>
+                        <td align="left">* price is a demical, i.e. 10.99, 11.22</br>* category_id is positive integer</br>*location and image_url are null by default </td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api/products/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">name, description, price, location, image_url</td>
+                        <td align="left">* price is a demical, i.e. 10.99, 11.22</br>*location and image_url are null by default </td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api/products/:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left"></td>
+                </tr>
+                <tr align="center"><td colspan="5">/api/orders (incomplete)</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api//</td>
@@ -214,7 +251,7 @@
                         <td align="center">N/A</td>
                         <td align="left">* all inputs are string</td>
                 </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/transactions (incomplete)</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api//</td>
@@ -250,43 +287,7 @@
                         <td align="center">N/A</td>
                         <td align="left">* all inputs are string</td>
                 </tr>
-                <tr><td></td></tr>
-                <tr valign="top">
-                        <td align="center">GET</td>
-                        <td align="center">/api//</td>
-                        <td align="center">N/A</td>
-                        <td align="center">N/A</td>
-                        <td align="left">* all inputs are string</td>
-                </tr>
-                <tr valign="top">
-                        <td align="center">GET</td>
-                        <td align="center">/api//:id</td>
-                        <td align="center">N/A</td>
-                        <td align="center">N/A</td>
-                        <td align="left">* all inputs are string</td>
-                </tr>
-                <tr valign="top">
-                        <td align="center">POST</td>
-                        <td align="center">/api//</td>
-                        <td align="center">...</td>
-                        <td align="center">...</td>
-                        <td align="left">* all inputs are string</td>
-                </tr>
-                <tr valign="top">
-                        <td align="center">PUT</td>
-                        <td align="center">/api//:id</td>
-                        <td align="center">N/A</td>
-                        <td align="center">...</td>
-                        <td align="left">* all inputs are string</td>
-                </tr>
-                <tr valign="top">
-                        <td align="center">DELETE</td>
-                        <td align="center">/api//:id</td>
-                        <td align="center">N/A</td>
-                        <td align="center">N/A</td>
-                        <td align="left">* all inputs are string</td>
-                </tr>
-                <tr><td></td></tr>
+                <tr align="center"><td colspan="5">/api/other (incomplete)</td></tr>
                 <tr valign="top">
                         <td align="center">GET</td>
                         <td align="center">/api//</td>
