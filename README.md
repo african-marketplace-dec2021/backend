@@ -59,72 +59,164 @@
                 <tr valign="top">
                         <td align="center">POST</td>
                         <td align="center">/api/auth/register</td>
-                        <td align="center">username, password</td>
+                        <td align="center">username, password, role</td>
                         <td align="center">N/A</td>
-                        <td align="left">*all inputs are string </br>*role is "buyer" or "seller"</td>
+                        <td align="left">* all inputs are string </br>* role is "buyer" or "seller"</td>
                 </tr>
                 <tr valign="top">
-                        <td>Everywhere</td><td align="right">2</td>
+                        <td align="center">POST</td>
+                        <td align="center">/api/auth/login</td>
+                        <td align="center">username, password, role</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string </br>* role is "buyer" or "seller"</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api//</td>
+                        <td align="center">...</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api//</td>
+                        <td align="center">...</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api//</td>
+                        <td align="center">...</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">GET</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">POST</td>
+                        <td align="center">/api//</td>
+                        <td align="center">...</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">PUT</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">...</td>
+                        <td align="left">* all inputs are string</td>
+                </tr>
+                <tr valign="top">
+                        <td align="center">DELETE</td>
+                        <td align="center">/api//:id</td>
+                        <td align="center">N/A</td>
+                        <td align="center">N/A</td>
+                        <td align="left">* all inputs are string</td>
                 </tr>
         </tbody>
-        <tfoot>
-                <tr valign="top">
-                        <td align="right">Sum:</td>
-                        <td align="right">1,234,569</td>
-                </tr>
-        </tfoot>
 </table>
 
-## Endpoint Summary
-
-        Method | Endpoint             |         Body (required)  | Body (optional)       | Notes
-        |:---    |: -------------------- |: -------------------------|: --------------------- |: -----|
-        POST   | /api/auth/register   | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        POST   | /api/auth/login      | username, password       |         N/A           | N/A
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/users/          |         N/A              |         N/A           | return all users
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/user/:id        |         N/A              |         N/A           | return one user
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        POST   | /api/users/          | username, password, role |         N/A           | all string inputs. role must be "buyer" or "seller"
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        PUT    | /api/users/:id       |         N/A              |  username, password   | all string inputs
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        DELETE | /api/users/:id       |         N/A              |         N/A           |  N/A
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/profiles/       |         N/A              |         N/A           | 
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/profiles/:id    |         N/A              |         N/A           | 
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        POST   | /api/profiles/       | first_name, last_name,   |      middle_name      | user_id is positive integer
-               |                      | email ,user_id           | 
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        PUT    | /api/profiles/:id    |         N/A              | firs_name, last_name, |
-               |                      |                          |  middle_name, email   | 
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        DELETE | /api/profiles/:id    |         N/A              |         N/A           |  N/A
-        ---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/           |         N/A              |         N/A           | 
-        GET    | /api//:id        |         N/A              |         N/A           | 
-        POST   | /api//          |  |         N/A           | 
-        PUT    | /api//:id       |         N/A              |     | 
-        DELETE | /api//:id       |         N/A              |         N/A           |  N/A---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/           |         N/A              |         N/A           | 
-        GET    | /api//:id        |         N/A              |         N/A           | 
-        POST   | /api//          |  |         N/A           | 
-        PUT    | /api//:id       |         N/A              |     | 
-        DELETE | /api//:id       |         N/A              |         N/A           |  N/A---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/           |         N/A              |         N/A           | 
-        GET    | /api//:id        |         N/A              |         N/A           | 
-        POST   | /api//          |  |         N/A           | 
-        PUT    | /api//:id       |         N/A              |     | 
-        DELETE | /api//:id       |         N/A              |         N/A           |  N/A---    | -------------------- | -------------------------| --------------------- | -----
-        GET    | /api/           |         N/A              |         N/A           | 
-        GET    | /api//:id        |         N/A              |         N/A           | 
-        POST   | /api//          |  |         N/A           | 
-        PUT    | /api//:id       |         N/A              |     | 
-        DELETE | /api//:id       |         N/A              |         N/A           |  N/A
 ## ========== endpoint /api/auth ==========
 
 #### POST /api/auth/register
