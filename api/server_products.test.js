@@ -252,55 +252,7 @@ describe("[1] describe endpoint /api/products", () => {
         .send({ description: "" });
       expect(response2.body.message).toMatch(/description must/);
     });
-    test("[1-4-4] Sad, PUT /api/products/, fail due to invalid price - string decimal", async () => {
-      const newProduct = {
-        name: "product 1",
-        description: "no description",
-        category_id: 2,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      const id = response.body[0].id;
-      const response2 = await request(app)
-        .put(`/api/products/${id}`)
-        .send({ price: "10.99" });
-      expect(response2.body.message).toMatch(/price must/);
-    });
-    test("[1-4-5] Sad, PUT /api/products/, fail due to invalid price - string integer", async () => {
-      const newProduct = {
-        name: "product 1",
-        description: "no description",
-        category_id: 2,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      const id = response.body[0].id;
-      const response2 = await request(app)
-        .put(`/api/products/${id}`)
-        .send({ price: "10" });
-      expect(response2.body.message).toMatch(/price must/);
-    });
-    test("[1-4-6] Sad, PUT /api/products/, fail due to invalid category_id", async () => {
-      const newProduct = {
-        name: "product 1",
-        description: "no description",
-        category_id: 2,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      const id = response.body[0].id;
-      const response2 = await request(app)
-        .put(`/api/products/${id}`)
-        .send({ category_id: "400" });
-      expect(response2.body.message).toMatch(/category_id must/);
-    });
-    test("[1-4-7] Sad, PUT /api/products/, fail due to non exsistence category_id", async () => {
+    test("[1-4-4] Sad, PUT /api/products/, fail due to non exsistence category_id", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -317,7 +269,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response2.body.message).toMatch(/category_id 400 not found/);
     });
 
-    test("[1-4-8] Sad, PUT /api/products/, fail due to no fields", async () => {
+    test("[1-4-5] Sad, PUT /api/products/, fail due to no fields", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
