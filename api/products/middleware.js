@@ -55,7 +55,7 @@ async function verifyNewObject(req, res, next) {
         .max(30),
       price: yup
         .number("price required, must be positive number")
-        .required()
+        .required("price required, must be positive number")
         .positive(),
       description: yup
         .string()
@@ -74,7 +74,9 @@ async function verifyNewObject(req, res, next) {
 
     schema
       .validate({ name, price, description, category_id, image_url, location })
-      .then((value) => {})
+      .then((value) => {
+        console.log("value = ", value);
+      })
       .catch((err) => {
         console.log("err.name = ", err.name);
         console.log("err.errors = ", err.errors);
