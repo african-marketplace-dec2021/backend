@@ -59,7 +59,7 @@ const schemaModifiedObject = yup.object().shape({
 
 async function verifyExistingId(req, res, next) {
   try {
-    //------------------------------------------------------------
+    //----------------not working code---------------------------
     // const { id } = req.params;
     // schemaModifiedObject
     //   .validate({ id })
@@ -75,7 +75,7 @@ async function verifyExistingId(req, res, next) {
     //     res.status(400).json({ message: err.errors[0] });
     //   });
 
-    //----------------------------------------------------------
+    //---------------working code-------------------------------
     const { id } = req.params;
     if (isUndefined(id)) {
       res.status(400).json({ message: "require id" });
