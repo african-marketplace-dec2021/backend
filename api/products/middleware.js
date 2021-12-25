@@ -12,18 +12,27 @@ const {
 const schema = yup.object().shape({
   name: yup
     .string()
-    .min(3, "name must be string, between 3 to 30 characters long")
-    .max(30, "name must be string, between 3 to 30 characters long"),
+    .required("require name")
+    .typeError("name must be string")
+    .min(3, "name must be at least 3 characters")
+    .max(30, "name must be at most 30 characters"),
   description: yup
     .string()
-    .min(3, "description must be string beteen3 and 1000 characters long")
-    .max(3000, "description must be string beteen3 and 1000 characters long"),
+    .required("require description")
+    .typeError("description must be string")
+    .min(3, "description must be at least 3 characters")
+    .max(3000, "description must be at most 5 characters long"),
   price: yup
-    .number("price must be a positive number")
+    .number()
+    .required("require price")
+    .typeError("price must be number")
     .positive("price must be a positive number"),
   category_id: yup
-    .number("category_id must be a number")
-    .integer("category_id must be a number"),
+    .number()
+    .required("require category_id")
+    .typeError("cagetory_id must be number")
+    .integer("category_id must be a number")
+    .min(1, "category_id must be greater than 0"),
 });
 
 async function verifyExistingId(req, res, next) {
@@ -59,40 +68,29 @@ async function verifyNewObject(req, res, next) {
   try {
     const { name, price, description, category_id, image_url, location } =
       req.body;
-    if (
-      isUndefined(name) ||
-      isUndefined(price) ||
-      isUndefined(description) ||
-      isUndefined(category_id)
-    ) {
-      res.status(400).json({
-        message: "require fields : name, description, price, and category_id",
-      });
-    } else {
-      schema
-        .validate({
+    schema
+      .validate({
+        name,
+        price,
+        description,
+        category_id,
+        image_url,
+        location,
+      })
+      .then((value) => {
+        req.body.newProduct = {
           name,
           price,
           description,
           category_id,
-          image_url,
-          location,
-        })
-        .then((value) => {
-          req.body.newProduct = {
-            name,
-            price,
-            description,
-            category_id,
-            image_url: isUndefined(image_url) ? null : image_url,
-            location: isUndefined(location) ? null : location,
-          };
-          next();
-        })
-        .catch((err) => {
-          res.status(400).json({ message: err.errors[0] });
-        });
-    }
+          image_url: isUndefined(image_url) ? null : image_url,
+          location: isUndefined(location) ? null : location,
+        };
+        next();
+      })
+      .catch((err) => {
+        res.status(400).json({ message: err.errors[0] });
+      });
   } catch (err) {
     next(err);
   }

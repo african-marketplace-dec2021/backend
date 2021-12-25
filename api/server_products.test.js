@@ -58,7 +58,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body[0]).toHaveProperty("category_id");
       expect(response.body[0]).toHaveProperty("id");
     });
-    test("[1-3-12] Happy, POST /api/products/, successfully created a new profile with middle_name", async () => {
+    test("[1-3-2] Happy, POST /api/products/, successfully created a new profile with middle_name", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -78,43 +78,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body[0]).toHaveProperty("image_url");
       expect(response.body[0]).toHaveProperty("location");
     });
-    test("[1-3-2] Sad, POST /api/products/, fail due to insufficient inputs", async () => {
-      const newProduct = {
-        nam: "product 2",
-        descriptionn: "no description",
-        category_id: 1,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      expect(response.body.message).toMatch(/require fields :/);
-    });
-    test("[1-3-3] Sad, POST /api/products/, fail due to invalid name", async () => {
-      const newProduct = {
-        name: "",
-        description: "no description",
-        category_id: 1,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      expect(response.body.message).toMatch(/name must/);
-    });
-    test("[1-3-4] Sad, POST /api/products/, fail due to invalid description", async () => {
-      const newProduct = {
-        name: "product 1",
-        description: "",
-        category_id: 1,
-        price: 10.99,
-      };
-      const response = await request(app)
-        .post("/api/products/")
-        .send(newProduct);
-      expect(response.body.message).toMatch(/description must/);
-    });
-    test("[1-3-5] Happy, POST /api/products/, price as string integer", async () => {
+    test("[1-3-3] Happy, POST /api/products/, price as string integer", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -133,7 +97,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body[0]).toHaveProperty("image_url");
       expect(response.body[0]).toHaveProperty("location");
     });
-    test("[1-3-6] Happy, POST /api/products/, price as string decimal", async () => {
+    test("[1-3-4] Happy, POST /api/products/, price as string decimal", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -153,7 +117,58 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body[0]).toHaveProperty("image_url");
       expect(response.body[0]).toHaveProperty("location");
     });
-    test("[1-3-7] Happy, POST /api/products/, category_id as string", async () => {
+    test("[1-3-5] Sad, POST /api/products/, fail due to missing fields ", async () => {
+      const response1 = await request(app).post("/api/products/").send({
+        description: "no description",
+        category_id: 1,
+        price: 10.99,
+      });
+      const response2 = await request(app).post("/api/products/").send({
+        name: "sss",
+        category_id: 1,
+        price: 10.99,
+      });
+      const response3 = await request(app).post("/api/products/").send({
+        name: "sss",
+        description: "no description",
+        price: 10.99,
+      });
+      const response4 = await request(app).post("/api/products/").send({
+        name: "sss",
+        description: "no description",
+        category_id: 1,
+      });
+      expect(response1.body.message).toMatch(/require name/);
+      expect(response2.body.message).toMatch(/require description/);
+      expect(response3.body.message).toMatch(/require category_id/);
+      expect(response4.body.message).toMatch(/require price/);
+    });
+    test("[1-3-6] Sad, POST /api/products/, fail due to invalid name", async () => {
+      const newProduct = {
+        name: "ss",
+        description: "no description",
+        category_id: 1,
+        price: 10.99,
+      };
+      const response = await request(app)
+        .post("/api/products/")
+        .send(newProduct);
+      expect(response.body.message).toMatch(/name must/);
+    });
+    test("[1-3-7] Sad, POST /api/products/, fail due to invalid description", async () => {
+      const newProduct = {
+        name: "product 1",
+        description: "ss",
+        category_id: 1,
+        price: 10.99,
+      };
+      const response = await request(app)
+        .post("/api/products/")
+        .send(newProduct);
+      expect(response.body.message).toMatch(/description must/);
+    });
+
+    test("[1-3-8] Happy, POST /api/products/, category_id as string", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -173,7 +188,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body[0]).toHaveProperty("image_url");
       expect(response.body[0]).toHaveProperty("location");
     });
-    test("[1-3-8] Sad, POST /api/products/, fail due to non existing category_id", async () => {
+    test("[1-3-9] Sad, POST /api/products/, fail due to non existing category_id", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
@@ -186,7 +201,7 @@ describe("[1] describe endpoint /api/products", () => {
       expect(response.body.message).toMatch(/not found/);
     });
 
-    test("[1-3-8] Sad, POST /api/products/, fail due to category_id as string decimal", async () => {
+    test("[1-3-10] Sad, POST /api/products/, fail due to category_id as string decimal", async () => {
       const newProduct = {
         name: "product 1",
         description: "no description",
