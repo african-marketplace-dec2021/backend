@@ -64,7 +64,7 @@ async function verifyExistingId(req, res, next) {
     // schemaModifiedObject
     //   .validate({ id })
     //   .then(async (value) => {
-    //     const boolean = await isIdInTable(req.params.id);
+    //     const boolean = await isIdInTable(value.id);
     //     if (boolean === false) {
     //       res.status(400).json({ message: `id ${id} not found` });
     //     } else {
@@ -73,6 +73,7 @@ async function verifyExistingId(req, res, next) {
     //   })
     //   .catch((err) => {
     //     res.status(400).json({ message: err.errors[0] });
+    //     // res.status(400).json({ message: err.errors[0] });
     //   });
 
     //---------------working code-------------------------------
