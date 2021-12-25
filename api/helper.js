@@ -1,5 +1,5 @@
 function isUndefined(input) {
-  return typeof input === "undefined";
+  return typeof input === "undefined" || input === null;
 }
 
 function isString(input) {
