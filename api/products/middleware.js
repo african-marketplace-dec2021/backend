@@ -9,7 +9,7 @@ const {
   processBodyToObject,
 } = require("../helper");
 
-const schema = yup.object().shape({
+const schemaNewObject = yup.object().shape({
   name: yup
     .string()
     .required("require name")
@@ -35,8 +35,47 @@ const schema = yup.object().shape({
     .min(1, "category_id must be greater than 0"),
 });
 
+const schemaModifiedObject = yup.object().shape({
+  name: yup
+    .string()
+    .typeError("name must be string")
+    .min(3, "name must be at least 3 characters")
+    .max(30, "name must be at most 30 characters"),
+  description: yup
+    .string()
+    .typeError("description must be string")
+    .min(3, "description must be at least 3 characters")
+    .max(3000, "description must be at most 5 characters long"),
+  price: yup
+    .number()
+    .typeError("price must be number")
+    .positive("price must be a positive number"),
+  category_id: yup
+    .number()
+    .typeError("cagetory_id must be number")
+    .integer("category_id must be a number")
+    .min(1, "category_id must be greater than 0"),
+});
+
 async function verifyExistingId(req, res, next) {
   try {
+    //------------------------------------------------------------
+    // const { id } = req.params;
+    // schemaModifiedObject
+    //   .validate({ id })
+    //   .then(async (value) => {
+    //     const boolean = await isIdInTable(req.params.id);
+    //     if (boolean === false) {
+    //       res.status(400).json({ message: `id ${id} not found` });
+    //     } else {
+    //       next();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     res.status(400).json({ message: err.errors[0] });
+    //   });
+
+    //----------------------------------------------------------
     const { id } = req.params;
     if (isUndefined(id)) {
       res.status(400).json({ message: "require id" });
@@ -68,7 +107,7 @@ async function verifyNewObject(req, res, next) {
   try {
     const { name, price, description, category_id, image_url, location } =
       req.body;
-    schema
+    schemaNewObject
       .validate({
         name,
         price,
@@ -121,7 +160,7 @@ async function verifyModifiedObject(req, res, next) {
     if (Object.keys(req.body.modifiedObject).length === 0) {
       res.status(400).json({ message: "no valid column name detected" });
     } else {
-      schema
+      schemaModifiedObject
         .validate(req.body.modifiedObject)
         .then((value) => {
           next();
