@@ -14,7 +14,7 @@
     "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "jest": "cross-env NODE_ENV=testing jest --verbose --runInBand --silent --watch",
     "deploy": "git push heroku main",
-    "config": "heroku config -a african-marketplace-dec-2021",
+    "configh": "heroku config -a african-marketplace-dec-2021",
     "resetdbh": "heroku run npm run resetdb -a african-marketplace-dec-2021",
     "logh": "heroku logs -a african-marketplace-dec-2021"
   },
